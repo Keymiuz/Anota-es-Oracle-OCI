@@ -46,7 +46,7 @@ Este repositório contém minhas anotações de estudo para as certificações O
 
 ## ⚠️ Aviso Legal
 
-Estas são anotações de estudo pessoais. Embora tenham sido criadas com o máximo de cuidado e atenção aos detalhes, elas devem ser usadas como um **suplemento**, e não como um substituto, para a [documentação oficial da Oracle](https://docs.oracle.com/en/cloud/iaas/) e os materiais de treinamento da [Oracle University](https://education.oracle.com/oracle-certification-path/p_2-OCI-MC-ARCH-2023-A).
+Estas são anotações de estudo pessoais. Embora tenham sido criadas com o máximo de cuidado e atenção aos detalhes, elas devem ser usadas como um **suplemento**, e não como um substituto, para a [documentação oficial da Oracle](https://docs.oracle.com/en/cloud/iaas/) e os materiais de treinamento da [Oracle University](https://education.oracle.com/).
 
 
 
