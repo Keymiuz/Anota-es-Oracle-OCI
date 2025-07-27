@@ -35,20 +35,27 @@ Este repositório contém minhas anotações de estudo para as certificações O
 - `7.1OracleBaseDatabaseService.md` - Tópicos Avançados
 - `7.2MySQLDatabase.md` - MySQL Database Service
 
-## 📌 Como Usar
-1. Navegue até o tópico de interesse
-2. Consulte as anotações para revisão rápida
-3. Utilize como material de apoio durante os estudos
+## 🚀 Como Usar
 
-## 🤝 Contribuições
-Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests com correções e adições.
+1.  Clone o repositório para ter uma cópia local:
+    ```bash
+    git clone [https://github.com/Keymiuz/Anota-es-Oracle-OCI.git](https://github.com/Keymiuz/Anota-es-Oracle-OCI.git)
+    ```
+2.  Navegue pelos arquivos `.md` usando um editor de texto ou um visualizador de Markdown.
+3.  Use as anotações como um material de revisão rápida antes de provas ou para reforçar conceitos chave.
 
-## 📜 Licença
-Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
+## ⚠️ Aviso Legal
 
-## 🙏 Agradecimentos
-- Oracle University pelo excelente material de preparação
-- Comunidade Oracle por compartilhar conhecimento
+Estas são anotações de estudo pessoais. Embora tenham sido criadas com o máximo de cuidado e atenção aos detalhes, elas devem ser usadas como um **suplemento**, e não como um substituto, para a [documentação oficial da Oracle](https://docs.oracle.com/en/cloud/iaas/) e os materiais de treinamento da [Oracle University](https://education.oracle.com/oracle-certification-path/p_2-OCI-MC-ARCH-2023-A).
+
+
+
+
+
+
+
+
+
 
 *Última atualização: Julho 2025*
 
