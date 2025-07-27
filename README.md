@@ -31,9 +31,9 @@ Este repositório contém minhas anotações de estudo para as certificações O
 - [Integração com Google Cloud](6OCI-Google.md)
 
 ### 4. Bancos de Dados
-- `7.0OracleBaseDatabaseService.md` - Serviço Base de Banco de Dados
-- `7.1OracleBaseDatabaseService.md` - Tópicos Avançados
-- `7.2MySQLDatabase.md` - MySQL Database Service
+- [Serviço Base de Banco de Dados](7.0OracleBaseDatabaseService.md)
+- [Tópicos Avançados](7.1OracleBaseDatabaseService.md)
+- [MySQL Database Service](7.2MySQLDatabase.md)
 
 ## 🚀 Como Usar
 
