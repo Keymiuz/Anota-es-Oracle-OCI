@@ -48,7 +48,3 @@ O processo envolve ações em ambos os consoles. A chave para a conexão é a tr
 5.  **Verificação:** Confirme que os circuitos estão provisionados e ativos em ambos os lados.
 6.  **Configuração Final:** Configure as **regras de segurança** e as **tabelas de rota** em ambas as nuvens para permitir e direcionar o tráfego.
 7.  **Teste:** Teste a conectividade entre as instâncias.
-
-## Resiliência
-
-Para obter resiliência, você pode repetir todo o processo para criar uma **segunda conexão** FastConnect Partner entre o OCI e o Google Cloud.
