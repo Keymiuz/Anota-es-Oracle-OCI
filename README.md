@@ -34,9 +34,14 @@ Este repositório contém minhas anotações de estudo para as certificações O
 - [Serviço Base de Banco de Dados](7.0OracleBaseDatabaseService.md)
 - [Tópicos Avançados](7.1OracleBaseDatabaseService.md)
 - [MySQL Database Service](7.2MySQLDatabase.md)
-- [Oracle Database@Azure - Arquitetura](8.0OracleDatabase@Azure.md)
-- [Oracle Database@Azure - Gerenciamento Operacional](8.2OracleDatabase@Azure.md)
-- [Oracle Database@Azure - HA e DR (High Availability e Disaster Recovery)](8.3OracleDatabase@Azure.md)
+
+#### 5. Oracle Database@Azure
+- [Arquitetura](8.0OracleDatabase@Azure.md)
+- [Rede e Conectividade](8.1.0OracleDatabase@Azure.md)
+- [Provisionamento de Recursos](8.1.2OracleDatabase@Azure.md)
+- [Gerenciamento Operacional](8.2OracleDatabase@Azure.md)
+- [HA e DR (Alta Disponibilidade e Recuperação de Desastres)](8.3OracleDatabase@Azure.md)
+- [Permissões e Controle de Acesso](8.4OracleDatabase@Azure.md)
 
 ## 🚀 Como Usar
 
