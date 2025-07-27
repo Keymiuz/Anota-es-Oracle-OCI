@@ -39,7 +39,7 @@ Este repositório contém minhas anotações de estudo para as certificações O
 
 1.  Clone o repositório para ter uma cópia local:
     ```bash
-    git clone [https://github.com/Keymiuz/Anota-es-Oracle-OCI.git](https://github.com/Keymiuz/Anota-es-Oracle-OCI.git)
+    git clone https://github.com/Keymiuz/Anota-es-Oracle-OCI.git
     ```
 2.  Navegue pelos arquivos `.md` usando um editor de texto ou um visualizador de Markdown.
 3.  Use as anotações como um material de revisão rápida antes de provas ou para reforçar conceitos chave.
