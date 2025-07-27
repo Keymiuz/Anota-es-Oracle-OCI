@@ -10,45 +10,43 @@ Este repositório contém minhas anotações de estudo para as certificações O
 ## 📂 Estrutura do Repositório
 
 ### 1. Conceitos Fundamentais
-- `1OracleMultiCloud.md` - Visão geral do Multicloud na OCI
-- `2.0OCIAccess.md` - Controle de Acesso e Identidade
-  - `2.1OCIdentityDomain.md` - Domínios de Identidade
-  - `2.2OCIFederation.md` - Federação de Identidade
+- [Visão geral do Multicloud na OCI](1OracleMultiCloud.md)
+- [Controle de Acesso e Identidade](2.0OCIAccess.md)
+  - [Domínios de Identidade](2.1OCIdentityDomain.md)
+  - [Federação de Identidade](2.2OCIFederation.md)
 
 ### 2. Rede e Conectividade
-- `3.0OCINetworks.md` - Conceitos de Rede na OCI
-  - `3.1OCIVCN.md` - Virtual Cloud Network (VCN)
-  - `3.2OCIVCNNATGateway.md` - Gateway NAT
-  - `3.3VCNRoute.md` - Tabelas de Roteamento
-  - `3.4VCNPeering.md` - Peering de VCNs
-  - `3.5DRG.md` - Dynamic Routing Gateway
+- [Conceitos de Rede na OCI](3.0OCINetworks.md)
+  - [Virtual Cloud Network (VCN)](3.1OCIVCN.md)
+  - [Gateway NAT](3.2OCIVCNNATGateway.md)
+  - [Tabelas de Roteamento](3.3VCNRoute.md)
+  - [Peering de VCNs](3.4VCNPeering.md)
+  - [Dynamic Routing Gateway](3.5DRG.md)
 
 ### 3. Conectividade Multinuvem
-- `4.0MCN.md` - Oracle Multicloud Networking
-- `4.1Site-to-SiteVPN.md` - VPN Site-to-Site
-- `4.2FastConnect.md` - Oracle FastConnect
-- `5.0OCI-AzureInterconnect.md` - Interconexão OCI-Azure
-- `6OCI-Google.md` - Integração com Google Cloud
+- [Oracle Multicloud Networking](4.0MCN.md)
+- [VPN Site-to-Site](4.1Site-to-SiteVPN.md)
+- [Oracle FastConnect](4.2FastConnect.md)
+- [Interconexão OCI-Azure](5.0OCI-AzureInterconnect.md)
+- [Integração com Google Cloud](6OCI-Google.md)
 
 ### 4. Bancos de Dados
-- `7.0OracleBaseDatabaseService.md` - Serviço Base de Banco de Dados
-- `7.1OracleBaseDatabaseService.md` - Tópicos Avançados
-- `7.2MySQLDatabase.md` - MySQL Database Service
+- [Serviço Base de Banco de Dados](7.0OracleBaseDatabaseService.md)
+- [Tópicos Avançados](7.1OracleBaseDatabaseService.md)
+- [MySQL Database Service](7.2MySQLDatabase.md)
 
-## 📌 Como Usar
-1. Navegue até o tópico de interesse
-2. Consulte as anotações para revisão rápida
-3. Utilize como material de apoio durante os estudos
+## 🚀 Como Usar
 
-## 🤝 Contribuições
-Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests com correções e adições.
+1.  Clone o repositório para ter uma cópia local:
+    ```bash
+    git clone [https://github.com/Keymiuz/Anota-es-Oracle-OCI.git](https://github.com/Keymiuz/Anota-es-Oracle-OCI.git)
+    ```
+2.  Navegue pelos arquivos `.md` usando um editor de texto ou um visualizador de Markdown.
+3.  Use as anotações como um material de revisão rápida antes de provas ou para reforçar conceitos chave.
 
-## 📜 Licença
-Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
+## ⚠️ Aviso Legal
 
-## 🙏 Agradecimentos
-- Oracle University pelo excelente material de preparação
-- Comunidade Oracle por compartilhar conhecimento
+Estas são anotações de estudo pessoais. Embora tenham sido criadas com o máximo de cuidado e atenção aos detalhes, elas devem ser usadas como um **suplemento**, e não como um substituto, para a [documentação oficial da Oracle](https://docs.oracle.com/en/cloud/iaas/) e os materiais de treinamento da [Oracle University](https://education.oracle.com/oracle-certification-path/p_2-OCI-MC-ARCH-2023-A).
 
 *Última atualização: Julho 2025*
 
