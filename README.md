@@ -43,6 +43,13 @@ Este repositório contém minhas anotações de estudo para as certificações O
 - [HA e DR (Alta Disponibilidade e Recuperação de Desastres)](8.3OracleDatabase@Azure.md)
 - [Permissões e Controle de Acesso](8.4OracleDatabase@Azure.md)
 
+#### 6. Oracle Database@Google Cloud
+- [Arquitetura e Visão Geral](9.1OracleDatabase@Google.md)
+- [Onboarding e Configuração Inicial](9.2OracleDatabase@Google.md)
+- [Topologias de Rede](9.3OracleDatabase@Google.md)
+- [Provisionamento de Bancos de Dados](9.4OracleDatabase@Google.md)
+- [Gerenciamento Operacional](9.5OracleDatabase@Google.md)
+
 ## 🚀 Como Usar
 
 1.  Clone o repositório para ter uma cópia local:
