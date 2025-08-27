@@ -9,33 +9,34 @@ Este repositório contém minhas anotações de estudo para as certificações O
 
 ## 📂 Estrutura do Repositório
 
-### 1. Conceitos Fundamentais
+## OCI Multicloud
+### Conceitos Fundamentais
 - [Visão geral do Multicloud na OCI](1OracleMultiCloud.md)
 - [Controle de Acesso e Identidade](2.0OCIAccess.md)
-  - [Domínios de Identidade](2.1OCIdentityDomain.md)
-  - [Federação de Identidade](2.2OCIFederation.md)
+- [Domínios de Identidade](2.1OCIdentityDomain.md)
+- [Federação de Identidade](2.2OCIFederation.md)
 
-### 2. Rede e Conectividade
+### Rede e Conectividade
 - [Conceitos de Rede na OCI](3.0OCINetworks.md)
-  - [Virtual Cloud Network (VCN)](3.1OCIVCN.md)
-  - [Gateway NAT](3.2OCIVCNNATGateway.md)
-  - [Tabelas de Roteamento](3.3VCNRoute.md)
-  - [Peering de VCNs](3.4VCNPeering.md)
-  - [Dynamic Routing Gateway](3.5DRG.md)
+- [Virtual Cloud Network (VCN)](3.1OCIVCN.md)
+- [Gateway NAT](3.2OCIVCNNATGateway.md)
+- [Tabelas de Roteamento](3.3VCNRoute.md)
+- [Peering de VCNs](3.4VCNPeering.md)
+- [Dynamic Routing Gateway](3.5DRG.md)
 
-### 3. Conectividade Multinuvem
+### Conectividade Multinuvem
 - [Oracle Multicloud Networking](4.0MCN.md)
 - [VPN Site-to-Site](4.1Site-to-SiteVPN.md)
 - [Oracle FastConnect](4.2FastConnect.md)
 - [Interconexão OCI-Azure](5.0OCI-AzureInterconnect.md)
 - [Integração com Google Cloud](6OCI-Google.md)
 
-### 4. Bancos de Dados
+### Bancos de Dados
 - [Serviço Base de Banco de Dados](7.0OracleBaseDatabaseService.md)
 - [Tópicos Avançados](7.1OracleBaseDatabaseService.md)
 - [MySQL Database Service](7.2MySQLDatabase.md)
 
-#### 5. Oracle Database@Azure
+#### Oracle Database@Azure
 - [Arquitetura](8.0OracleDatabase@Azure.md)
 - [Rede e Conectividade](8.1.0OracleDatabase@Azure.md)
 - [Provisionamento de Recursos](8.1.2OracleDatabase@Azure.md)
@@ -43,7 +44,7 @@ Este repositório contém minhas anotações de estudo para as certificações O
 - [HA e DR (Alta Disponibilidade e Recuperação de Desastres)](8.3OracleDatabase@Azure.md)
 - [Permissões e Controle de Acesso](8.4OracleDatabase@Azure.md)
 
-#### 6. Oracle Database@Google Cloud
+#### Oracle Database@Google Cloud
 - [Arquitetura e Visão Geral](9.1OracleDatabase@Google.md)
 - [Onboarding e Configuração Inicial](9.2OracleDatabase@Google.md)
 - [Topologias de Rede](9.3OracleDatabase@Google.md)
