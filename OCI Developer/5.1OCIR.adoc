@@ -108,3 +108,5 @@ Antes de poder realizar operações de push e pull de imagens, os seguintes requ
 . *Acesso à Docker CLI:* É necessário ter acesso à interface de linha de comando do Docker na máquina local.
 . *Permissões de IAM:* O usuário deve pertencer a um grupo com políticas que concedam as permissões apropriadas, ou pertencer ao grupo de Administradores da tenancy.
 . *Credenciais de Usuário:* O usuário já deve possuir um nome de usuário OCI e um *Token de Autenticação (Auth Token)* válido para se conectar ao registry.
+
+image::images/image20.png[alt="OCIR", title="Fluxo dos Pré-Requisitos"]
