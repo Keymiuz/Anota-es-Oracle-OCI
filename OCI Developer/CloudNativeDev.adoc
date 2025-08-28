@@ -122,7 +122,7 @@ Achar e reter talentos que dominem o ecossistema cloud-native é difícil e caro
 *Segurança*::
 Mais serviços, mais redes, mais APIs... a superfície de ataque aumenta drasticamente.
 
-[AVISO]
+[WARNING]
 ====
 *DevSecOps não é opcional!* A segurança tem que ser parte da cultura do time e do pipeline de CI/CD. Pensar em segurança só depois que o hacker já entrou é receita para o desastre.
 ====
