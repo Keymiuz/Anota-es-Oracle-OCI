@@ -75,6 +75,8 @@ spec:
   - name: ocir-secret
 ----
 
+image::images/image19.png[alt="OCIR", title="Manejando Images"]
+
 == Gerenciamento de Segurança
 
 === Controle de Acesso com IAM
@@ -90,8 +92,6 @@ O OCIR oferece controle de acesso granular sobre as operações que os usuários
 O OCIR pode ser configurado para escanear imagens em busca de vulnerabilidades de segurança publicadas em bancos de dados CVE (Common Vulnerabilities and Exposures).
 * O serviço utiliza o *OCI Vulnerability Scanning Service* e sua API REST para realizar a varredura.
 * É necessário definir políticas de IAM que permitam ao Vulnerability Scanning Service ler os repositórios e compartments da tenancy.
-
-image::images/image19.png[alt="OCIR", title="Manejando Images"]
 
 [NOTE]
 ====
