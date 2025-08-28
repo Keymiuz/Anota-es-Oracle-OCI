@@ -115,6 +115,8 @@ Essa tabela é material de prova! Resume as principais diferenças.
 
 image::images\image3.png[alt="Camadas da Arquit de Microsserviços", title="Camadas da Arquitetura de Microsserviços"]
 
+image::images\image4.png[alt="Camadas da Arquit de Microsserviços", title="Um vs Outro"]
+
 == Como os Serviços Conversam: Protocolos e Estilos
 
 Como os serviços são distribuídos, a comunicação via rede é fundamental. Existem dois critérios principais para classificar essa comunicação.
