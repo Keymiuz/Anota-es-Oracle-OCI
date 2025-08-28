@@ -1,0 +1,146 @@
+= Anotações de Dev: Microsserviços Deep Dive
+João Pedro <jpcicolo@gmail.com
+:toc:
+:icons: font
+
+== Afinal, o que são Microsserviços?
+
+A ideia central é simples: em vez de construir uma aplicação gigante e única (o famoso monolito), a gente quebra a funcionalidade em um monte de *componentes individuais e independentes*.
+
+Cada um desses "mini-serviços" pode ser desenvolvido e deployado separadamente, e eles geralmente se comunicam via *APIs*.
+
+=== Características Essenciais (O DNA de um Microsserviço)
+
+Aqui estão os pontos que definem essa arquitetura.
+
+*Poliglota*::
+Cada time tem a liberdade de usar a tecnologia que faz mais sentido para o seu serviço. Um time pode usar Node.js, outro Python, e um terceiro Go, tudo na mesma aplicação. A estrutura geral não é afetada.
+
+*Baixo Acoplamento (Loosely Coupled)*::
+Os serviços são isolados. Se um serviço está lento ou com problemas de performance, podemos mexer nele sem impactar o resto do sistema. Esse isolamento aumenta a produtividade e a resiliência.
+
+*Deploy e Manutenção Independentes*::
+Como cada serviço é pequeno e isolado, o código é mais fácil de entender e manter. Se uma mudança é necessária em uma parte da aplicação, alteramos e fazemos o deploy *apenas* do serviço relacionado, sem precisar mexer na aplicação inteira.
+
+*Escalável e com Alta Disponibilidade*::
+É muito mais fácil escalar um único serviço que está recebendo muita carga do que a aplicação inteira. Podemos usar técnicas como _load balancing_ e _API Gateways_ para escalar serviços individualmente e garantir a alta disponibilidade.
+
+*Resistente a Falhas (Resiliente)*::
+A gente já constrói o serviço esperando que falhas aconteçam. Com políticas de _fault tolerance_ no código, se um serviço quebrar (ex: o serviço de "preferências do cliente" em um app de cinema), o erro fica contido e não derruba a aplicação inteira (os serviços de "compra" e "agendamento" continuam funcionando).
+
+== Arquitetura na Prática: Exemplo de E-commerce
+
+Para entender melhor, vamos visualizar a arquitetura de um app de e-commerce com 3 camadas principais.
+
+[source,text]
+----
++-------------------------------------------------------------+
+|                    Cliente (Browser/Mobile)                 |
++-------------------------------------------------------------+
+                              |
+                              v
++-------------------------------------------------------------+
+|                 API Gateway / API Layer                     |
+|        (HTTP, gRPC) - Ponto de Entrada e Comunicação        |
++-------------------------------------------------------------+
+              |                 |                |
+              v                 v                v
++-------------+   +-------------+   +-------------+
+|  Serviço A  |   |  Serviço B  |   |  Serviço C  |  <-- Logic Layer
+|  (Java)     |   |  (Python)   |   |  (Go)       |
++-------------+   +-------------+   +-------------+
+       |                 |                |
+       v                 v                v
++-------------+   +-------------+   +-------------+
+|  Database A |   |  Database B |   |  Database C |  <-- Data Store Layer
+|  (Postgres) |   |  (MongoDB)  |   |  (Redis)    |
++-------------+   +-------------+   +-------------+
+----
+
+.Camadas da Arquitetura:
+. *API Layer:* É a porta de entrada para todas as requisições dos clientes. Também é por aqui que os serviços se comunicam entre si (usando protocolos como HTTP, gRPC, etc.).
+. *Logic Layer:* Onde a regra de negócio vive. Cada microsserviço foca em uma única tarefa de negócio e tem o mínimo de dependência dos outros.
+. *Data Store Layer:* Cada serviço tem seu próprio banco de dados ou mecanismo de persistência. Isso garante o isolamento e a independência dos dados.
+
+NOTE: Note que cada serviço roda em seu próprio contêiner, o que permite que eles sejam escalados individualmente usando orquestradores como o *Kubernetes*.
+
+== A Briga do Século: Microsserviços vs. Monolito
+
+Essa tabela é material de prova! Resume as principais diferenças.
+
+[options="header", cols="1,2,2"]
+|===
+| Característica | Arquitetura de Microsserviços | Arquitetura Monolítica
+
+| *Design da Unidade*
+| Serviços com baixo acoplamento, independentes.
+| Aplicação única, tudo fortemente acoplado.
+
+| *Reuso de Funcionalidade*
+| Fácil, via APIs que expõem as funcionalidades.
+| Limitado, depende de chamadas internas de funções.
+
+| *Comunicação*
+| Chamadas de API via rede (ex: REST com HTTP).
+| Chamadas internas de procedimentos e funções (na memória).
+
+| *Flexibilidade de Tecnologia*
+| Alta. Cada serviço pode ter sua própria stack.
+| Baixa. A aplicação inteira usa uma única stack.
+
+| *Gerenciamento de Dados*
+| Descentralizado. Cada serviço tem seu próprio DB.
+| Centralizado. Todos compartilham o mesmo banco de dados.
+
+| *Deployment*
+| Deploy independente por serviço. Pequeno e rápido.
+| Deploy da aplicação inteira. Lento e arriscado.
+
+| *Manutenção*
+| Mais simples. Foco em pedaços pequenos de código.
+| Complexa. Mexer em uma parte pode quebrar outra.
+
+| *Resiliência*
+| Alta. A falha de um serviço não derruba tudo.
+| Baixa. Uma falha pode derrubar a aplicação inteira.
+
+| *Escalabilidade*
+| Granular. Escala-se apenas o serviço necessário.
+| Tudo ou nada. Escala-se a aplicação inteira.
+|===
+
+== Como os Serviços Conversam: Protocolos e Estilos
+
+Como os serviços são distribuídos, a comunicação via rede é fundamental. Existem dois critérios principais para classificar essa comunicação.
+
+=== Estilos de Comunicação: Síncrono vs. Assíncrono
+
+. *Comunicação Síncrona:*
+** O cliente envia uma requisição e *espera bloqueado* pela resposta.
+** Protocolos comuns: HTTP/HTTPS, gRPC.
+** Ex: Um serviço de pagamento que precisa confirmar a transação na hora.
+
+. *Comunicação Assíncrona:*
+** O cliente envia uma mensagem e *não espera* pela resposta. A thread não fica bloqueada.
+** Geralmente usa um intermediário (Message Broker).
+** Protocolo comum: AMQP (Advanced Message Queuing Protocol).
+** Ferramentas populares: Kafka, RabbitMQ.
+** Ex: Um serviço que dispara um e-mail de "boas-vindas" após o cadastro. Não precisa ser instantâneo.
+
+[TIP]
+====
+Para comunicação interna entre serviços (dentro do mesmo cluster), o *gRPC* é uma excelente escolha. Ele usa um formato binário, o que o torna muito mais rápido e eficiente em termos de tamanho de payload do que o JSON sobre HTTP.
+====
+
+=== Padrões de Destinatários: Um-para-Um vs. Um-para-Muitos
+
+. *Receptor Único (One-to-One):*
+** Cada requisição é processada por exatamente um serviço.
+** É o padrão mais comum. Ex: Uma chamada de API para buscar os dados de um usuário específico.
+
+. *Múltiplos Receptores (One-to-Many):*
+** Uma mensagem ou evento é enviado e múltiplos serviços podem reagir a ele.
+** É a base de arquiteturas orientadas a eventos (_Event-Driven_).
+** Ex: Um evento "PedidoCriado" é publicado. O serviço de "Estoque" reage para diminuir a quantidade, o serviço de "Notificações" reage para avisar o cliente, e o serviço de "Financeiro" reage para iniciar o processo de cobrança.
+
+NOTE: Na prática, a maioria das aplicações de microsserviços usa uma combinação de diferentes estilos de comunicação, dependendo do caso de uso.
