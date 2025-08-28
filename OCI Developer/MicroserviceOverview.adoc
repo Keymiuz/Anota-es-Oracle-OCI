@@ -8,6 +8,7 @@ João Pedro <jpcicolo@gmail.com
 A ideia central é simples: em vez de construir uma aplicação gigante e única (o famoso monolito), a gente quebra a funcionalidade em um monte de *componentes individuais e independentes*.
 
 Cada um desses "mini-serviços" pode ser desenvolvido e deployado separadamente, e eles geralmente se comunicam via *APIs*.
+image::OCI Developer\images\image.png[alt="O que são Microsserviços", title="O que são Microsserviços?"]
 
 === Características Essenciais (O DNA de um Microsserviço)
 
