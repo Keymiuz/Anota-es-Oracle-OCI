@@ -65,7 +65,8 @@ Para entender melhor, vamos visualizar a arquitetura de um app de e-commerce com
 . *Data Store Layer:* Cada serviço tem seu próprio banco de dados ou mecanismo de persistência. Isso garante o isolamento e a independência dos dados.
 
 NOTE: Note que cada serviço roda em seu próprio contêiner, o que permite que eles sejam escalados individualmente usando orquestradores como o *Kubernetes*.
-image::images/image2.png[alt="Camadas da Arquitetura", title="Camadas da Arquitetura Simples"]
+
+image::images\image2.png[alt="Camadas da Arquitetura", title="Camadas da Arquitetura Simples"]
 
 == A Briga do Século: Microsserviços vs. Monolito
 
