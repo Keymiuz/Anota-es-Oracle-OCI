@@ -1,7 +1,7 @@
 # Oracle Cloud Infrastructure (OCI) Certification Study Notes
 
 ## 📚 Sobre o Repositório
-Este repositório contém minhas anotações de estudo para as certificações Oracle Cloud Infrastructure (OCI), com foco principal no exame **Oracle Cloud Infrastructure Multicloud Architect Professional (2025)**. Aqui você encontrará resumos estruturados dos principais tópicos e serviços da OCI, organizados por domínios de conhecimento.
+Este repositório contém minhas anotações de estudo para as certificações Oracle Cloud Infrastructure (OCI), com foco principal no exame **Oracle Cloud Infrastructure Multicloud Architect Professional (2025)** (por enquanto). Aqui você encontrará resumos estruturados dos principais tópicos e serviços da OCI, organizados por domínios de conhecimento.
 
 ## 🎯 Objetivo
 - Documentar conceitos-chave da OCI para preparação para certificações
@@ -50,6 +50,15 @@ Este repositório contém minhas anotações de estudo para as certificações O
 - [Topologias de Rede](9.3OracleDatabase@Google.md)
 - [Provisionamento de Bancos de Dados](9.4OracleDatabase@Google.md)
 - [Gerenciamento Operacional](9.5OracleDatabase@Google.md)
+
+## OCI Developer
+### Fundamentos
+- [Visão Geral do Desenvolvimento na Nuvem](1CloudNativeDev.adoc)
+- [Arquitetura de Microsserviços](2.0MicroserviceOverview.adoc)
+- [Padrões de Microsserviços](2.1MicroserviceOverview2.adoc)
+
+### DevOps e CI/CD
+- [DevOps na OCI](3DevOps.adoc)
 
 ## 🚀 Como Usar
 
