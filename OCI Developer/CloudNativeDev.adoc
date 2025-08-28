@@ -1,0 +1,144 @@
+= Anotações Consolidadas: O Guia do Dev para Cloud-Native e CNCF
+:toc:
+:icons: font
+
+== O que é a tal da CNCF?
+
+A *CNCF (Cloud-Native Computing Foundation)* é basicamente quem bota ordem no ecossistema cloud-native. É um projeto da *Linux Foundation* (desde 2015) que cuida dos projetos open source mais importantes da área.
+
+.Principal objetivo
+Fazer com que a gente consiga rodar nossas aplicações em qualquer nuvem, sem ficar refém de um provedor (*vendor lock-in*). A ideia é padronizar as coisas para criar e rodar apps escaláveis em ambientes dinâmicos como *multi-cloud* e *hybrid-cloud*.
+
+A CNCF é a "dona" de projetos que a gente usa todo dia:
+* *Kubernetes:* O padrão de mercado pra orquestração de contêineres.
+* *Prometheus:* Pra monitoramento e alertas.
+* *Envoy:* Proxy de serviço, muito usado em service mesh.
+* *containerd:* O runtime de contêiner em si.
+* E vários outros (Fluentd, CoreDNS, etc.).
+
+== Os Pilares do Cloud-Native (Importante pra prova!)
+
+São os conceitos fundamentais que a gente precisa dominar.
+
+=== Microsserviços
+
+É a arquitetura de quebrar o antigo "monolito" em serviços menores, independentes e com baixo acoplamento. Cada um cuida de uma regra de negócio específica.
+
+.Pontos-chave
+. *Deploy independente:* Dá pra atualizar um serviço sem precisar mexer nos outros. Muito mais ágil.
+. *Mix de tecnologias:* Um serviço pode ser em Go, outro em Node.js. Usa-se a melhor ferramenta para cada tarefa.
+. *Isolamento de falhas:* Se um serviço cair, a aplicação inteira (teoricamente) não morre junto.
+. *Rollback fácil:* Deu problema no deploy do serviço de pagamento? É só voltar a versão anterior dele, sem afetar o resto.
+
+=== Contêineres
+
+É a forma como a gente empacota e distribui os microsserviços. O contêiner é um pacote que tem *tudo* que a aplicação precisa pra rodar: código, libs, dependências, etc.
+
+A *containerização* garante que o ambiente de desenvolvimento seja idêntico ao de produção, acabando com o "mas na minha máquina funciona".
+
+Quando a quantidade de contêineres cresce, precisamos de um orquestrador pra gerenciar tudo isso. É aí que o *Kubernetes* entra.
+
+[TIP]
+====
+Lembrete de Dockerfile básico pra prova:
+[source,dockerfile]
+----
+# Isso aqui empacota uma app Python simples num contêiner.
+
+# Puxa uma imagem leve do Python
+FROM python:3.9-slim
+
+# Cria e define o diretório de trabalho
+WORKDIR /app
+
+# Copia o código da minha máquina pra dentro do contêiner
+COPY . .
+
+# Comando pra rodar a aplicação quando o contêiner subir
+CMD ["python", "minha_app.py"]
+----
+====
+
+=== DevOps
+
+Não é um cargo, é uma *cultura*. A ideia é juntar a galera de *Desenvolvimento (Dev)* e *Operações (Ops)* pra automatizar o ciclo de vida da aplicação e entregar valor mais rápido.
+
+O core disso é o *CI/CD (Continuous Integration / Continuous Delivery)*:
+* *CI (Integração Contínua):* Automatizar o merge e o teste do código cada vez que alguém faz um commit. Garante que o código novo não quebre o que já existe.
+* *CD (Entrega Contínua):* Automatizar o processo de deploy. Se passou no CI, gera um artefato (imagem de contêiner, por ex.) e o deixa pronto pra ir pra produção.
+
+=== Service Mesh
+
+Quando a gente tem dezenas ou centenas de microsserviços, a comunicação entre eles vira uma bagunça. A *Service Mesh* é uma camada de infraestrutura que entra pra gerenciar e monitorar essa comunicação.
+
+Ela resolve problemas de:
+* *Rede:* Roteamento, load balancing, retries.
+* *Segurança:* Autenticação e autorização entre serviços (mTLS).
+* *Observabilidade:* Métricas, logs e traces de como os serviços estão se falando.
+
+== Benefícios (O Lado Bom da Força)
+
+Aqui estão os pontos que a gente usa pra vender a ideia de cloud-native na empresa.
+
+*Velocidade de Entrega (Faster Release)*::
+Com CI/CD e DevOps no pipeline, a gente automatiza tudo. O resultado é que conseguimos entregar features novas pro cliente muito mais rápido, passando na frente da concorrência.
+
+*Gerenciamento Simplificado (Ease of Management)*::
+A ideia é gerenciar menos infra. Usando plataformas _serverless_, a gente não precisa se preocupar em configurar rede, alocar storage ou provisionar máquina virtual. O foco fica 100% no código.
+
+*Redução de Custos*::
+Cloud-native geralmente opera no modelo _pay-as-you-go_. Isso é chave: *Você só paga pelo que realmente usa.*
+
+*Sistema Confiável (Anti-queda)*::
+A arquitetura com microsserviços e Kubernetes já nasce pensando na falha. Os sistemas são tolerantes a falhas e têm _self-healing_. Se um serviço quebra, ele fica isolado e não derruba a aplicação inteira.
+
+*Sem Prisão (Avoid Vendor Lock-in)*::
+O ecossistema é baseado em código aberto e padrões. Isso significa que podemos construir uma aplicação que roda em qualquer lugar (AWS, Azure, GCP, on-premise) sem grandes alterações.
+
+*Escalabilidade*::
+É um dos maiores ganhos. A aplicação pode crescer (ou encolher) de acordo com a demanda, usando os recursos da nuvem de forma elástica.
+
+*Auto-provisionamento*::
+As aplicações cloud-native são espertas. Elas mesmas conseguem pedir os recursos que precisam (self-service) de forma programática, sem precisar de intervenção manual.
+
+== Desafios (Nem Tudo São Flores)
+
+Claro que a transição tem seus perrengues. É importante ter isso no radar.
+
+*Arquitetura Complexa*::
+Não vamos nos enganar: uma arquitetura baseada em microsserviços é bem mais complexa de gerenciar do que um monolito.
+
+*Evolução Tecnológica Rápida*::
+O ecossistema muda MUITO rápido. Se a gente não se atualizar constantemente, a stack fica obsoleta.
+
+*Inovação Contínua*::
+É preciso ter uma cultura de inovação constante. Se o time parar de experimentar e aprender, a empresa fica pra trás.
+
+*Dependência Excessiva*::
+Mesmo evitando o vendor lock-in do provedor, podemos acabar reféns de uma tecnologia ou plataforma específica.
+
+*Falta de Mão de Obra (Skills Shortage)*::
+Achar e reter talentos que dominem o ecossistema cloud-native é difícil e caro.
+
+*Segurança*::
+Mais serviços, mais redes, mais APIs... a superfície de ataque aumenta drasticamente.
+
+[WARNING]
+====
+*DevSecOps não é opcional!* A segurança tem que ser parte da cultura do time e do pipeline de CI/CD. Pensar em segurança só depois que o hacker já entrou é receita para o desastre.
+====
+
+*Custos Operacionais*::
+Uma infra cloud-native mal gerenciada pode estourar o orçamento. Se não for bem projetada e otimizada, a conta da nuvem no fim do mês pode ser uma surpresa bem desagradável.
+
+== Outras Anotações
+
+* *Oracle e CNCF:* A Oracle é "membro platinum", ou seja, investe pesado na fundação. Eles têm a própria stack de serviços cloud-native, a *OCI (Oracle Cloud Infrastructure)*.
+
+== Resumo da Ópera
+
+Cloud-native não é um destino final onde a gente chega e pronto, é uma **jornada de melhoria contínua**.
+
+[quote]
+_"Cloud-native is a journey and not a destination."_
+
