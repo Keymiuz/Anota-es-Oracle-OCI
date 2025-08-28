@@ -12,8 +12,6 @@ Essa integração tem algumas vantagens claras:
 * *Economia de Tempo e Esforço:* Usar uma solução pré-configurada na nuvem poupa um trabalho enorme de montar e manter essa infra do zero.
 * *Quebra de Silos:* Ferramentas na nuvem facilitam a colaboração entre os times de desenvolvimento e operações, garantindo continuidade e responsabilidade.
 
-image::images/image9.png[alt="DevOps na Nuvem", title="DevOps na Nuvem"]
-
 == OCI DevOps Service: O Canivete Suíço da Oracle
 
 O *Oracle Cloud Infrastructure (OCI) DevOps Service* é a plataforma completa de CI/CD da Oracle. O objetivo é facilitar todo o ciclo de vida de desenvolvimento (build, test, deploy) de software na OCI.
@@ -46,11 +44,11 @@ Uma das features mais importantes é o suporte a estratégias de deploy avançad
 ** A automação reduz a chance de erro humano, que é uma fonte comum de vulnerabilidades.
 ** Como a entrega de software é mais rápida, bugs de segurança podem ser corrigidos e deployados muito mais rapidamente.
 
-image::images/image10.png[alt="Componentes do OCI DevOps Service", title="Componentes do OCI DevOps Service"]
+image::images/image8.png[alt="Componentes do OCI DevOps Service", title="Componentes do OCI DevOps Service"]
 
 == Por que usar o serviço da OCI? (Benefícios)
 
-Ok, a plataforma parece completa, mas quais são os benefícios diretos de usá-la?
+A plataforma parece completa, mas quais são os benefícios diretos de usá-la?
 
 *Automação*::
 O serviço automatiza totalmente o ciclo de vida de entrega de software. Isso aumenta a velocidade de desenvolvimento e a confiabilidade das entregas, eliminando processos manuais que são lentos e propensos a erros.
@@ -78,8 +76,7 @@ Com as estratégias de deploy (rolling, canary, blue-green) e rollbacks automati
 
 *Baixo Custo*::
 O modelo de custo é enxuto. Para os deploys, o cliente paga apenas pelos recursos que são alvo do deploy (a VM, o cluster OKE, etc.), não pelo serviço de pipeline em si.
-
-image::images/image11.png[alt="Benefícios do OCI DevOps", title="Benefícios do OCI DevOps"]
+image::images/image9.png[alt="Benefícios do OCI DevOps", title="Benefícios do OCI DevOps"]
 
 == Resumo Rápido
 
