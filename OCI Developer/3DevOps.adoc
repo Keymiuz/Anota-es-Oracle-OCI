@@ -76,6 +76,7 @@ Com as estratégias de deploy (rolling, canary, blue-green) e rollbacks automati
 
 *Baixo Custo*::
 O modelo de custo é enxuto. Para os deploys, o cliente paga apenas pelos recursos que são alvo do deploy (a VM, o cluster OKE, etc.), não pelo serviço de pipeline em si.
+
 image::images/image9.png[alt="Benefícios do OCI DevOps", title="Benefícios do OCI DevOps"]
 
 == Resumo Rápido
