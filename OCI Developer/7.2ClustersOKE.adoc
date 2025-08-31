@@ -41,10 +41,10 @@ Se o arquivo de configuração da OCI CLI (`~/.oci/config`) contém múltiplos p
 
 .Existem dois métodos para isso:
 . *Modificar o arquivo `kubeconfig`:*
-+
+
 Adicione o argumento `--profile <profile-name>` na seção de argumentos do comando `oci` dentro do arquivo `kubeconfig`.
 . *Definir uma Variável de Ambiente:*
-+
+
 Antes de executar os comandos `kubectl`, defina a variável de ambiente `OCI_CLI_PROFILE`.
 [source,bash]
 ----
@@ -54,10 +54,10 @@ export OCI_CLI_PROFILE=<profile-name>
 === Lidando com Multi-Factor Authentication (MFA)
 
 Se uma política de IAM exige o uso de MFA, o `kubeconfig` precisa ser ajustado para suportar essa verificação.
-. *Modificar o arquivo `kubeconfig`:*
-+
+. *Modificar o arquivo `kubeconfig`:*   
+
 Adicione os argumentos `--auth` e `security_token` à seção de argumentos do comando `oci`. É crucial que o perfil especificado seja o do usuário verificado por MFA.
-+
+
 [source,text]
 ----
 args:
@@ -74,8 +74,9 @@ args:
 command: oci
 env: []
 ----
+
 . *Usar a Variável de Ambiente:*
-+
+
 Alternativamente, defina a variável `OCI_CLI_PROFILE` para o nome do perfil do usuário verificado por MFA antes de usar `kubectl`.
 
 === Acesso para Processos Automatizados (CI/CD)
