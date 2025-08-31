@@ -83,8 +83,6 @@ Alternativamente, defina a variável `OCI_CLI_PROFILE` para o nome do perfil do 
 
 Os tokens de autenticação gerados via OCI CLI são destinados a usuários individuais. Para processos automatizados e ferramentas (como pipelines de CI/CD) que precisam acessar o cluster, a abordagem recomendada é criar um *Kubernetes Service Account* e utilizar seu token de autenticação de longa duração no `kubeconfig`.
 
-image::images/image35.png[alt="Configurações Avançadas do Kubeconfig", title="Configurações Avançadas do Kubeconfig"]
-
 == Verificação da Conexão
 
 Após configurar o arquivo `kubeconfig`, é fundamental verificar se o `kubectl` consegue se conectar ao cluster.
