@@ -12,6 +12,7 @@ Este repositório contém minhas anotações de estudo para as certificações O
 ## OCI Multicloud
 ### Conceitos Fundamentais
 - [Visão geral do Multicloud na OCI](OCI%20Multicloud/1OracleMultiCloud.md)
+- [Visão geral do Multicloud na OCI (Parte 2)](OCI%20Multicloud/1OracleMultiCloud2.md)
 - [Controle de Acesso e Identidade](OCI%20Multicloud/2.0OCIAcsses.md)
 - [Domínios de Identidade](OCI%20Multicloud/2.1OCIdentityDomain.md)
 - [Federação de Identidade](OCI%20Multicloud/2.2OCIFederation.md)
@@ -29,6 +30,7 @@ Este repositório contém minhas anotações de estudo para as certificações O
 - [VPN Site-to-Site](OCI%20Multicloud/4.1Site-to-SiteVPN.md)
 - [Oracle FastConnect](OCI%20Multicloud/4.2FastConnect.md)
 - [Interconexão OCI-Azure](OCI%20Multicloud/5.0OCI-AzureInterconnect.md)
+- [Interconexão OCI-Azure (Tópicos Adicionais)](OCI%20Multicloud/5.15.0OCI-AzureInterconnect.md)
 - [Integração com Google Cloud](OCI%20Multicloud/6OCI-Google.md)
 
 ### Bancos de Dados
@@ -45,6 +47,7 @@ Este repositório contém minhas anotações de estudo para as certificações O
 - [Permissões e Controle de Acesso](OCI%20Multicloud/8.4OracleDatabase@Azure.md)
 
 #### Oracle Database@Google Cloud
+- [Visão Geral do Oracle Database@Google Cloud](OCI%20Multicloud/9.0OracleDatabase@Google.md)
 - [Arquitetura e Visão Geral](OCI%20Multicloud/9.1OracleDatabase@Google.md)
 - [Onboarding e Configuração Inicial](OCI%20Multicloud/9.2OracleDatabase@Google.md)
 - [Topologias de Rede](OCI%20Multicloud/9.3OracleDatabase@Google.md)
@@ -52,22 +55,47 @@ Este repositório contém minhas anotações de estudo para as certificações O
 - [Gerenciamento Operacional](OCI%20Multicloud/9.5OracleDatabase@Google.md)
 
 ## OCI Developer
-### Fundamentos
-- [Visão Geral do Desenvolvimento na Nuvem](OCI%20Developer/1CloudNativeDev.adoc)
-- [Arquitetura de Microsserviços](OCI%20Developer/2.0MicroserviceOverview.adoc)
-- [Padrões de Microsserviços](OCI%20Developer/2.1MicroserviceOverview2.adoc)
+
+### Fundamentos de Cloud Native
+- [Visão Geral do Desenvolvimento Cloud Native](OCI%20Developer/1.1CloudNativeDev.adoc)
+- [Visão Geral de Microsserviços](OCI%20Developer/1.2.0MicroserviceOverview.adoc)
+- [Padrões de Microsserviços](OCI%20Developer/1.2.1MicroserviceOverview2.adoc)
 
 ### DevOps e CI/CD
-- [DevOps na OCI](OCI%20Developer/3DevOps.adoc)
+- [Visão Geral de DevOps](OCI%20Developer/1.3.0DevOps.adoc)
+- [Serviço de DevOps da OCI](OCI%20Developer/1.3.1DevOps.adoc)
+- [Recursos do Serviço de DevOps](OCI%20Developer/1.3.2DevOps.adoc)
+
+### Containers
+- [Containers com Docker](OCI%20Developer/2.4.0DockerContainer.adoc)
+- [Comandos e Operações Docker](OCI%20Developer/2.4.1Docker.adoc)
+- [OCI Registry (OCIR) - Visão Geral](OCI%20Developer/2.5.0OCIR.adoc)
+- [Operações no OCIR](OCI%20Developer/2.5.1OCIR.adoc)
+
+### Kubernetes (OKE)
+- [Visão Geral do Kubernetes](OCI%20Developer/3.6.0Kubernetes.adoc)
+- [Oracle Kubernetes Engine (OKE)](OCI%20Developer/3.6.1OKE.adoc)
+- [Tipos de Clusters OKE](OCI%20Developer/3.6.2OKEClusters.adoc)
+- [Nós Virtuais no OKE](OCI%20Developer/3.6.3OKEVirtualNodes.adoc)
+- [Gerenciamento de Clusters OKE](OCI%20Developer/3.7.0ClusterOKE.adoc)
+- [Atualizando e Redimensionando Clusters](OCI%20Developer/3.7.1ClustersOKE.adoc)
+- [Segurança em Clusters OKE](OCI%20Developer/3.7.2ClustersOKE.adoc)
+- [Nós Gerenciados vs. Nós Virtuais](OCI%20Developer/3.7.3MangedVSVirtualNodes.adoc)
+- [Criação de Nós](OCI%20Developer/3.7.4NodeCreation.adoc)
+
+### Serverless
+- [Oracle Functions - Visão Geral](OCI%20Developer/4.1.1OracleFunctions.adoc)
+- [Operações com Oracle Functions](OCI%20Developer/4.1.2OracleFunctionsOperations.adoc)
+- [Casos de Uso do Oracle Functions](OCI%20Developer/4.1.3OracleFuncUseCases.adoc)
 
 ## 🚀 Como Usar
 
-1.  Clone o repositório para ter uma cópia local:
+1.  Clone o repositório para ter uma cópia local(se quiser):
     ```bash
     git clone https://github.com/Keymiuz/Anota-es-Oracle-OCI.git
     ```
-2.  Navegue pelos arquivos `.md` usando um editor de texto ou um visualizador de Markdown.
-3.  Use as anotações como um material de revisão rápida antes de provas ou para reforçar conceitos chave.
+2.  Navegue pelos arquivos usando um editor de texto ou um visualizador de Markdown/Asciidoc.
+3. Você pode navegar pelos arquivos diretamente pelo GitHub(recomendado e mais fácil, podendo pular os passos 1 e 2).
 
 ## ⚠️ Aviso Legal
 
@@ -75,6 +103,6 @@ Estas são anotações de estudo pessoais. Embora tenham sido criadas com o máx
 
 
 
-*Última atualização: Julho 2025*
+*Última atualização: Setembro 2025*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
