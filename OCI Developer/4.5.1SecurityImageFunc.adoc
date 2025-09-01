@@ -1,0 +1,59 @@
+= Segurança de Imagens no OCI Functions
+:toc:
+:icons: font
+
+== Varredura de Imagens por Vulnerabilidades (Scanning)
+
+A segurança das imagens de função é fundamental para garantir a integridade e a confiabilidade das funções implantadas. Uma das principais ferramentas para isso é a varredura de imagens no OCI Registry (OCIR).
+
+Este recurso permite habilitar ou desabilitar a varredura de imagens de função que são enviadas (push) ao registry. O objetivo é verificar os resultados para identificar quaisquer vulnerabilidades detectadas.
+
+.Funcionamento da Varredura de Imagens:
+* *Mecanismo:*
+** O OCIR utiliza o *OCI Vulnerability Scanning Service* para escanear as imagens em busca de vulnerabilidades de segurança publicadas no banco de dados CVE (Common Vulnerabilities and Exposures).
+
+* *Automação:*
+** Quando novas vulnerabilidades são adicionadas ao banco de dados CVE, o OCIR inicia automaticamente uma nova varredura das imagens nos repositórios que têm essa funcionalidade habilitada.
+
+* *Análise e Histórico:*
+** É possível visualizar os resultados de cada varredura realizada nos últimos 13 meses. Isso inclui um resumo do número de vulnerabilidades encontradas, uma avaliação de risco geral, descrições de cada vulnerabilidade individual, seus níveis de risco associados e links diretos para o banco de dados CVE.
+
+* *Gerenciamento:*
+** A varredura de imagens pode ser desabilitada a qualquer momento para um repositório específico.
+
+== Assinatura de Imagens para Garantia de Integridade
+
+A assinatura de imagens é uma medida de segurança crucial que envolve a assinatura digital das imagens de função antes de sua implantação. Este processo adiciona uma camada extra de proteção, garantindo que apenas imagens verificadas e não alteradas sejam implantadas no ambiente.
+
+=== Conceitos Fundamentais
+
+* *Verificação Dupla:*
+** A assinatura de imagem desempenha um papel fundamental não apenas na verificação da *origem* de uma imagem, mas também na garantia de sua *integridade* (ou seja, que ela não foi adulterada).
+
+* *Chaves de Criptografia (OCI Vault):*
+** O processo de assinatura exige o uso de uma *Master Encryption Key* do tipo RSA assimétrico, proveniente do serviço *OCI Vault*.
+
+* *Múltiplas Assinaturas:*
+** Uma única imagem pode ter múltiplas assinaturas, cada uma associada a uma Master Encryption Key distinta. As assinaturas são vinculadas ao OCID da imagem, proporcionando granularidade ao processo de verificação.
+
+* *Aplicação (Enforcement):*
+** É possível aplicar uma política em uma aplicação de função para garantir que apenas imagens assinadas por chaves confiáveis possam ser implantadas, aumentando a segurança e a integridade das aplicações.
+
+=== Passos para Implementação
+
+Para garantir que as funções sejam seguras através da assinatura de imagens, os seguintes passos devem ser seguidos:
+
+. *Obter as Master Encryption Keys:*
+As chaves, que são cruciais para a assinatura, devem ser obtidas do serviço OCI Vault.
+
+. *Criar uma Política de Verificação de Assinatura de Imagem:*
+Esta política define quais Master Encryption Keys devem ser usadas para assinar imagens ao criar, atualizar, implantar e invocar funções dentro de uma aplicação específica.
+
+. *Especificar a Chave no `func.yaml` ao Fazer o Deploy:*
+Ao implantar funções usando o comando `fn deploy`, a Master Encryption Key deve ser especificada no arquivo `func.yaml`. Durante o deploy, a CLI do Fn Project assinará a imagem da função com a chave especificada.
+
+. *Basear as Funções em Imagens Assinadas:*
+É uma boa prática garantir que cada função criada ou atualizada seja baseada em imagens de contêiner que já foram assinadas pela Master Encryption Key definida na política de verificação.
+
+. *Seguir o Processo de Assinatura da OCI:*
+Utilizar a CLI do Fn Project para assinar as imagens de função e aderir às diretrizes da OCI para manter a segurança da imagem dentro do OCI Registry.
