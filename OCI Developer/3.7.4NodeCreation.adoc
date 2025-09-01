@@ -109,9 +109,7 @@ O endereço IP aparecerá na coluna `EXTERNAL-IP`. Ao acessá-lo em um navegador
 O exemplo anterior utiliza a imagem `nginx` do Docker Hub, que é um repositório público. Para utilizar imagens de um registry privado, como o OCI Registry (OCIR), é necessário fornecer credenciais de autenticação ao cluster. Isso é feito criando um *Secret* do Kubernetes do tipo `docker-registry`.
 
 . *Crie o Secret de Autenticação:*
-+
 Execute o comando a seguir no seu terminal, substituindo os placeholders pelos seus dados.
-+
 [source,bash]
 ----
 kubectl create secret docker-registry <secret-name> \
@@ -120,7 +118,6 @@ kubectl create secret docker-registry <secret-name> \
     --docker-password='<oci-auth-token>' \
     --docker-email='<email-address>'
 ----
-+
 *Parâmetros:*
 *`<secret-name>`*:: Um nome de sua escolha para o Secret. Ex: `ocirsecret`.
 *`<region-key>`*:: A chave da região do OCI Registry que você está usando. Ex: `iad` para Ashburn.
@@ -128,7 +125,6 @@ kubectl create secret docker-registry <secret-name> \
 *`<oci-username>`*:: O nome de usuário OCI a ser usado para puxar a imagem.
 *`<oci-auth-token>`*:: O Token de Autenticação (Auth Token) gerado para o usuário especificado.
 *`<email-address>`*:: Um endereço de e-mail.
-+
 [IMPORTANT]
 ====
 Note que strings contendo caracteres especiais (como a senha/token) devem estar entre aspas simples (`'`).
@@ -137,9 +133,7 @@ Note que strings contendo caracteres especiais (como a senha/token) devem estar 
 image::images/image39.png[alt="Configuração do Secret de Autenticação", title="Configuração do Secret de Autenticação"]
 
 . *Referencie o Secret no seu Deployment:*
-+
 Para que os Pods possam usar este secret para puxar a imagem, adicione a seção `imagePullSecrets` ao seu arquivo de manifesto do Deployment (`deployment.yaml`).
-+
 [source,yaml]
 ----
 apiVersion: apps/v1
@@ -162,9 +156,8 @@ spec:
         image: iad.ocir.io/mynamespace/my-repo/my-app:v1.0
         ports:
         - containerPort: 8080
-      # Adicione esta seção para usar o secret
       imagePullSecrets:
-      - name: ocirsecret # O nome do secret criado no passo anterior
+      - name: ocirsecret 
 ----
 
 === 7. Removendo o Cluster
