@@ -1,0 +1,86 @@
+= Visão Geral do Oracle Functions
+:toc:
+:icons: font
+
+== O Cenário: A Necessidade de uma Solução Serverless
+
+O desenvolvimento de aplicações modernas frequentemente enfrenta dois desafios principais:
+. A necessidade de as equipes de desenvolvimento se concentrarem na lógica de negócio, sem o fardo do gerenciamento de infraestrutura.
+. A capacidade de lidar com picos súbitos de tráfego de forma transparente, garantindo performance ótima sem a necessidade de ajustes manuais de escalabilidade.
+
+A computação _Serverless_, e especificamente o serviço Oracle Functions, aborda diretamente esses desafios.
+
+=== O que é Computação Serverless?
+
+Embora o termo "serverless" (sem servidor) possa ser enganoso, pois ainda envolve servidores, a principal característica é que estes servidores são totalmente gerenciados pelos provedores de nuvem. Os usuários não precisam provisionar, configurar ou manter a infraestrutura subjacente.
+
+[NOTE]
+====
+.Analogia: A Rede Elétrica
+Utilizar a computação serverless é como consumir eletricidade em casa. Em vez de instalar painéis solares, baterias e toda a fiação (gerenciar a própria infraestrutura), um usuário simplesmente se conecta à rede elétrica local e paga apenas pela eletricidade que consome. Da mesma forma, com o serverless, o desenvolvedor "conecta" seu código à nuvem, e o provedor gerencia o fornecimento de CPU e memória, cobrando apenas pelo uso efetivo.
+====
+
+Com o serverless, os desenvolvedores podem criar e implantar aplicações de forma autônoma, sem a necessidade de envolver equipes de operações no provisionamento e gerenciamento de servidores, otimizando o processo de desenvolvimento e acelerando o _time-to-market_.
+
+== Oracle Functions: Definição e Segurança
+
+*Oracle Functions* é uma plataforma serverless, do tipo *Function-as-a-Service (FaaS)*, totalmente gerenciada e integrada com o Oracle Cloud Infrastructure.
+
+.Características Principais:
+* *Integrado com OCI:* Totalmente integrado ao ecossistema da Oracle Cloud.
+* *Baseado no Fn Project:* Construído sobre o projeto de código aberto Fn, garantindo robustez e flexibilidade.
+* *Container-Native:* As funções são implantadas como imagens de contêiner e executadas em um ambiente nativo de contêiner.
+
+=== Segurança
+
+A segurança é uma prioridade na plataforma. As funções são protegidas utilizando os mecanismos de segurança padrão da OCI, como:
+* Networking (VCNs, Security Lists)
+* Identity and Access Management (IAM)
+* Compartments
+
+Isso garante que as funções operem em um ambiente seguro e controlado.
+
+== Benefícios Principais
+
+*Eficiência de Custo (Pay-per-use)*::
+O Oracle Functions opera em um modelo de pagamento por uso. A cobrança ocorre apenas quando as funções estão ativamente em execução. Se as funções estiverem ociosas, não há custo, tornando a solução altamente custo-efetiva.
+
+*Gerenciamento Autônomo*::
+A plataforma é autônoma, gerenciando o provisionamento, a gerência e o auto-scaling das funções. Isso permite que as equipes de desenvolvimento se concentrem exclusivamente na escrita e implantação do código, sem o overhead de gerenciamento de infraestrutura.
+
+*Arquitetura Orientada a Eventos*::
+É uma plataforma orientada a eventos. Ela se integra com vários serviços da OCI, permitindo que o código da função seja acionado automaticamente com base em eventos específicos, o que facilita a automação e a integração dentro do ambiente de nuvem.
+
+== Experiência de Desenvolvimento e Funcionalidades
+
+=== Abordagem Container-Native
+
+O fato de as funções serem empacotadas e executadas como contêineres é uma vantagem chave. Esta abordagem garante que as funções sejam isoladas, portáteis e escaláveis. Ao encapsular a função e todas as suas dependências em uma imagem de contêiner, garante-se uma execução consistente em diferentes ambientes.
+
+Essa abordagem também permite que bibliotecas de código aberto sejam facilmente empacotadas e reutilizadas como parte das funções, acelerando o processo de desenvolvimento.
+
+=== Suporte a Linguagens (FDKs)
+
+O Oracle Functions oferece *Function Development Kits (FDKs)* para uma variedade de linguagens de programação populares, incluindo:
+* Python
+* Java
+* Go
+* Node.js
+* Ruby
+
+Os FDKs fornecem um conjunto de ferramentas e bibliotecas que simplificam o desenvolvimento, o deploy e o gerenciamento das funções.
+
+=== Customização Avançada
+
+Para casos de uso mais avançados, a plataforma oferece flexibilidade adicional.
+
+* *Bring Your Own Dockerfile (BYOD) (visto também no outro curso, a ideia é a mesma):*
+** Permite customizar a imagem Docker gerada pelo Fn Project, dando total controle sobre o ambiente de execução para atender a necessidades específicas.
+
+* *Otimização com Micronaut e GraalVM Native Image:*
+** É possível utilizar o framework de microsserviços *Micronaut* para construir aplicações leves e modulares.
+** O uso do *GraalVM Native Image* pode reduzir significativamente o tamanho da imagem de contêiner e o consumo de memória, resultando em tempos de inicialização mais rápidos e menor consumo de recursos.
+
+=== Anotações adicionais:
+
+* Para ser bem honesto, essa parte (de overview inicial) é praticamente a mesma do Multicloud Architect, já feito anteriormente, eu só anotei para não esquecer mesmo, mas se você seguir a mesma base anterior, está de boa.
