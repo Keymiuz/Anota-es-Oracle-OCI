@@ -169,6 +169,8 @@ run_image: fnproject/python:3.11
 
 É possível especificar uma versão exata da linguagem. Para usar Python 3.9, o comando seria `fn init --runtime python3.9 ...`, o que alteraria os valores no `func.yaml`. Para atualizar uma função existente para uma nova versão, basta modificar estes parâmetros no `func.yaml` e executar o comando `fn build`.
 
+image::images/image43.png[alt="Ecossistema do Oracle Functions", title="Exemplo de func.yaml"]
+
 === Customização Avançada
 
 * *Bring Your Own Dockerfile (BYOD):*
@@ -176,3 +178,7 @@ run_image: fnproject/python:3.11
 
 * *Otimização com Micronaut e GraalVM Native Image:*
 ** É possível utilizar o framework de microsserviços *Micronaut* e o *GraalVM Native Image* para reduzir significativamente o tamanho da imagem, o consumo de memória e o tempo de inicialização.
+
+=== Anotações adicionais:
+
+* Para ser bem honesto, essa parte (de overview inicial) é praticamente a mesma do Multicloud Architect, já feito anteriormente, eu só anotei para não esquecer mesmo, mas se você seguir a mesma base anterior, está de boa.
