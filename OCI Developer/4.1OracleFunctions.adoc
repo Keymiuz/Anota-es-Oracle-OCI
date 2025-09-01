@@ -84,3 +84,89 @@ Para casos de uso mais avançados, a plataforma oferece flexibilidade adicional.
 === Anotações adicionais:
 
 * Para ser bem honesto, essa parte (de overview inicial) é praticamente a mesma do Multicloud Architect, já feito anteriormente, eu só anotei para não esquecer mesmo, mas se você seguir a mesma base anterior, está de boa.
+
+=== Desenvolvedores de Funções (Function Developers)
+
+São os usuários da OCI que criam e implantam funções. Para interagir com o serviço, eles devem ter contas de usuário válidas e pertencer a grupos de IAM com as políticas apropriadas que concedam as permissões necessárias para criar, implantar e gerenciar recursos de funções.
+
+=== Aplicações (Applications)
+
+Uma Aplicação no OCI Functions é um recurso com múltiplos propósitos:
+* *Agrupamento Lógico:* Serve como um agrupamento lógico de funções.
+* *Configuração de Recursos:* Permite alocar e configurar recursos comuns a todas as funções dentro dela, como as sub-redes em que serão executadas.
+* *Contexto Comum:* Provê um contexto comum para armazenar variáveis de configuração que podem ser acessadas por todas as funções na aplicação.
+* *Isolamento de Runtime:* Garante que as execuções de funções de diferentes aplicações permaneçam isoladas umas das outras.
+
+[TIP]
+====
+A melhor prática para eficiência e performance é agrupar múltiplas funções relacionadas dentro de uma única aplicação.
+====
+
+=== Funções (Functions)
+
+A função é o conceito central. É um bloco de código pequeno e focado, projetado para executar uma única tarefa específica.
+* *Armazenamento:* Funções são armazenadas como imagens de contêiner em um Container Registry (OCIR) especificado.
+* *Metadados:* A definição da função é armazenada como metadados no servidor do OCI Functions. Isso inclui detalhes de execução como a imagem de contêiner a ser usada, o tempo máximo de execução e o consumo máximo de memória permitido.
+
+=== Invocações (Invocations)
+
+É o ato de executar uma função.
+* *Métodos:* Funções podem ser invocadas via Fn Project CLI, OCI SDKs, requisições HTTP assinadas para o seu `invoke endpoint`, ou por eventos de outros serviços OCI.
+* *Ciclo de Vida (Cold vs. Warm Start):*
+. Na *primeira invocação* (cold start), o OCI Functions baixa a imagem do contêiner do registry, a executa como um contêiner e, em seguida, executa a função.
+. Para *invocações subsequentes* (warm start), as requisições são direcionadas para o contêiner já em execução, minimizando a latência.
+. Após um período de inatividade, o contêiner é removido para otimizar o uso de recursos.
+
+=== Gatilhos (Triggers)
+
+Um trigger é o resultado de uma ação no sistema que envia uma requisição para invocar uma função.
+* *Orientado a Eventos:* Iniciado por eventos em outros serviços OCI (ex: um upload de arquivo no Object Storage).
+* *Orientado a Tempo:* Agendado para enviar requisições em intervalos definidos (ex: para tarefas periódicas).
+Uma função pode não ter nenhum trigger ou estar associada a múltiplos triggers.
+
+== Experiência de Desenvolvimento e Funcionalidades
+
+=== Abordagem Container-Native
+
+O fato de as funções serem empacotadas e executadas como contêineres é uma vantagem chave. Esta abordagem garante que as funções sejam isoladas, portáteis e escaláveis, com uma execução consistente em diferentes ambientes.
+
+=== Suporte a Linguagens e FDKs (Function Development Kits)
+
+O Oracle Functions utiliza os FDKs do Fn Project para suportar diversas linguagens, como Java, Node.js, Python, Go, Ruby e C#. Um FDK é uma coleção de bibliotecas auxiliares que gerenciam os aspectos internos do sistema.
+
+Cada FDK de linguagem é composto por três componentes:
+. *Build-time base image:* Imagem com as bibliotecas e ferramentas necessárias para construir a função.
+. *Runtime base image:* Imagem com o ambiente necessário para executar a função.
+. *FDK library:* Biblioteca que lida com protocolos, passagem de entradas/saídas, etc.
+
+=== O Comando `fn init` e o Arquivo `func.yaml`
+
+Ao criar uma função com o comando `fn init`, especifica-se a linguagem via a opção `--runtime`.
+[source,bash]
+----
+# Exemplo: Inicializando uma função Python
+fn init --runtime python <nome-da-funcao>
+----
+Este comando registra a linguagem e as imagens de build/run correspondentes no arquivo de configuração da função, o `func.yaml`.
+
+.Exemplo de `func.yaml` gerado para Python (versão mais recente)
+[source,yaml]
+----
+schema_version: 20180708
+name: helloworld-function
+version: 0.0.1
+runtime: python
+build_image: fnproject/python:3.11-dev
+run_image: fnproject/python:3.11
+...
+----
+
+É possível especificar uma versão exata da linguagem. Para usar Python 3.9, o comando seria `fn init --runtime python3.9 ...`, o que alteraria os valores no `func.yaml`. Para atualizar uma função existente para uma nova versão, basta modificar estes parâmetros no `func.yaml` e executar o comando `fn build`.
+
+=== Customização Avançada
+
+* *Bring Your Own Dockerfile (BYOD):*
+** Permite customizar a imagem Docker gerada pelo Fn Project, dando total controle sobre o ambiente de execução.
+
+* *Otimização com Micronaut e GraalVM Native Image:*
+** É possível utilizar o framework de microsserviços *Micronaut* e o *GraalVM Native Image* para reduzir significativamente o tamanho da imagem, o consumo de memória e o tempo de inicialização.
