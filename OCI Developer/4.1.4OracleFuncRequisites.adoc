@@ -1,0 +1,99 @@
+= Pré-requisitos para a Criação de OCI Functions
+:toc:
+:icons: font
+
+== Limites de Serviço (Service Limits)
+
+Antes de iniciar o desenvolvimento com OCI Functions, é essencial estar ciente dos limites de serviço. Estes limites ditam o número de recursos que podem ser criados por região e variam de acordo com o tipo de conta (método de pagamento).
+
+[options="header", cols="2,2,2"]
+|===
+| Recurso (Nome do Limite) | Limite (Oracle Universal Credits) | Limite (Pay As You Go / Trial)
+
+| *Aplicações* (`application-count`)
+| 20
+| 10
+
+| *Funções* (`function-count`)
+| 500
+| 50
+
+| *Memória Total para Execuções Concorrentes* (`total-concurrency-mb`)
+| 60 GB (ou 180 GB para regiões com 3 ADs)
+| 60 GB (ou 180 GB para regiões com 3 ADs)
+
+| *Memória Total para Concorrência Provisionada* (`provisioned-concurrency-mb`)
+| 40 GB
+| 40 GB
+|===
+
+[NOTE]
+====
+.Limite de Payload
+Cada função está sujeita a um limite de tamanho de payload fixo e imutável de *6 MB*, tanto para requisições de entrada quanto para respostas de saída.
+====
+
+== Configuração de IAM e Compartments
+
+=== Contas de Usuário e Grupos
+
+A responsabilidade primária do administrador da tenancy é criar contas de usuário na OCI e atribuí-las a grupos. Estes grupos são cruciais para gerenciar o acesso e as permissões aos recursos relacionados a funções através de políticas de IAM. Se grupos e usuários adequados já existirem, não é necessário criar novos.
+
+=== Estrutura de Compartments
+
+Antes de os usuários poderem criar e implantar funções, o administrador da tenancy deve criar um ou mais compartments para abrigar os recursos.
+* *Compartment de Rede:* Para possuir recursos de rede como VCN, subnets, gateways, etc.
+* *Compartment de Funções:* Para possuir recursos relacionados a funções, como Aplicações e Funções.
+
+É possível utilizar o mesmo compartment para ambos os tipos de recursos ou criar compartments separados para uma maior segregação de responsabilidades.
+
+== Configuração de Rede (VCN e Subnets)
+
+=== Requisitos da VCN
+
+Uma VCN (Virtual Cloud Network) com as subnets necessárias deve existir antes que os usuários possam implantar funções. As subnets são onde as funções e aplicações residirão.
+
+[TIP]
+====
+A Oracle recomenda a configuração de Security Lists com regras _stateless_ para facilitar o maior número possível de conexões concorrentes.
+====
+
+=== Cálculo do Bloco CIDR (Dimensionamento de IPs)
+
+A VCN deve possuir um bloco CIDR com um número mínimo de endereços IP livres. Este número é determinado pela memória alocada e pela concorrência esperada de todas as funções que serão executadas nas subnets da mesma VCN.
+
+.Passos para Calcular os IPs Necessários:
+. Para cada função, identifique a memória especificada para sua execução (em GB). Ex: 512 MB = 0.5 GB.
+. Determine o número máximo esperado de execuções concorrentes para essa função.
+. Multiplique a memória (GB) pela concorrência para obter a *memória total máxima requerida por função*.
+. Some a memória total máxima de *todas* as funções que executarão concorrentemente na mesma VCN para obter a *memória total máxima geral*.
+. Divida a memória total máxima geral por *14* (pois cada 14 GB de uso de memória requer um endereço IP adicional). O resultado é o número de IPs necessários para a concorrência.
+. Adicione *3* IPs reservados para uso interno *por cada subnet* na VCN.
+. Some o resultado do passo 5 com o resultado do passo 6 para obter o número mínimo total de IPs que o bloco CIDR da VCN deve oferecer.
+
+=== Exemplo Prático de Cálculo
+
+Vamos considerar um exemplo com uma única função em uma VCN com uma única subnet regional.
+
+.Parâmetros do Exemplo:
+* *Memória por função:* 512 MB (0.5 GB)
+* *Máximo de execuções concorrentes:* 2.000
+* *Número de subnets:* 1
+
+.Cálculo:
+* *Memória total máxima requerida pela função:*
++
+`0.5 GB * 2.000 execuções = 1.000 GB`
+* *IPs necessários para concorrência:*
++
+`1.000 GB / 14 = 71.42` (arredondado para *72 IPs*)
+* *IPs reservados para a subnet:*
++
+`1 subnet * 3 = 3 IPs`
+* *Total mínimo de IPs necessários:*
++
+`72 + 3 = 75 IPs`
+
+Neste caso, um bloco CIDR `/25`, que oferece 128 endereços IP distintos, seria suficiente para atender aos requisitos da VCN.
+
+image::images/image50.png[alt="Cálculo de IPs para VCN do Functions", title="Cálculo de IPs para VCN do Functions"]
