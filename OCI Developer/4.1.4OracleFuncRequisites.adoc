@@ -33,6 +33,8 @@ Antes de iniciar o desenvolvimento com OCI Functions, é essencial estar ciente 
 Cada função está sujeita a um limite de tamanho de payload fixo e imutável de *6 MB*, tanto para requisições de entrada quanto para respostas de saída.
 ====
 
+image::images/image51.png[alt="Limites de Serviço do OCI Functions", title="Limites de Serviço do OCI Functions"]
+
 == Configuração de IAM e Compartments
 
 === Contas de Usuário e Grupos
@@ -49,9 +51,7 @@ Antes de os usuários poderem criar e implantar funções, o administrador da te
 
 == Configuração de Rede (VCN e Subnets)
 
-=== Requisitos da VCN
-
-Uma VCN (Virtual Cloud Network) com as subnets necessárias deve existir antes que os usuários possam implantar funções. As subnets são onde as funções e aplicações residirão.
+Uma VCN (Virtual Cloud Network) com as subnets necessárias deve existir antes que os usuários possam implantar funções. As subnets são onde as funções e aplicações residirão. A VCN deve ter um bloco CIDR com IPs livres suficientes, cujo cálculo é detalhado abaixo.
 
 [TIP]
 ====
@@ -60,40 +60,78 @@ A Oracle recomenda a configuração de Security Lists com regras _stateless_ par
 
 === Cálculo do Bloco CIDR (Dimensionamento de IPs)
 
-A VCN deve possuir um bloco CIDR com um número mínimo de endereços IP livres. Este número é determinado pela memória alocada e pela concorrência esperada de todas as funções que serão executadas nas subnets da mesma VCN.
+O número mínimo de IPs livres necessários é determinado pela memória e concorrência esperada de todas as funções na mesma VCN.
 
 .Passos para Calcular os IPs Necessários:
-. Para cada função, identifique a memória especificada para sua execução (em GB). Ex: 512 MB = 0.5 GB.
+. Para cada função, identifique a memória especificada para sua execução (em GB).
 . Determine o número máximo esperado de execuções concorrentes para essa função.
 . Multiplique a memória (GB) pela concorrência para obter a *memória total máxima requerida por função*.
-. Some a memória total máxima de *todas* as funções que executarão concorrentemente na mesma VCN para obter a *memória total máxima geral*.
-. Divida a memória total máxima geral por *14* (pois cada 14 GB de uso de memória requer um endereço IP adicional). O resultado é o número de IPs necessários para a concorrência.
-. Adicione *3* IPs reservados para uso interno *por cada subnet* na VCN.
-. Some o resultado do passo 5 com o resultado do passo 6 para obter o número mínimo total de IPs que o bloco CIDR da VCN deve oferecer.
-
-=== Exemplo Prático de Cálculo
-
-Vamos considerar um exemplo com uma única função em uma VCN com uma única subnet regional.
-
-.Parâmetros do Exemplo:
-* *Memória por função:* 512 MB (0.5 GB)
-* *Máximo de execuções concorrentes:* 2.000
-* *Número de subnets:* 1
-
-.Cálculo:
-* *Memória total máxima requerida pela função:*
-+
-`0.5 GB * 2.000 execuções = 1.000 GB`
-* *IPs necessários para concorrência:*
-+
-`1.000 GB / 14 = 71.42` (arredondado para *72 IPs*)
-* *IPs reservados para a subnet:*
-+
-`1 subnet * 3 = 3 IPs`
-* *Total mínimo de IPs necessários:*
-+
-`72 + 3 = 75 IPs`
-
-Neste caso, um bloco CIDR `/25`, que oferece 128 endereços IP distintos, seria suficiente para atender aos requisitos da VCN.
+. Some a memória total máxima de *todas* as funções na mesma VCN para obter a *memória total máxima geral*.
+. Divida a memória total máxima geral por *14* (pois cada 14 GB de uso de memória requer um IP adicional).
+. Adicione *3* IPs reservados *por cada subnet* na VCN.
+. Some os resultados dos passos 5 e 6 para obter o total mínimo de IPs necessários.
 
 image::images/image50.png[alt="Cálculo de IPs para VCN do Functions", title="Cálculo de IPs para VCN do Functions"]
+
+== Políticas de IAM para Usuários e Serviços
+
+Para que os usuários possam utilizar o OCI Functions, administradores devem criar políticas de IAM específicas que controlam o acesso tanto dos usuários quanto do próprio serviço OCI Functions aos recursos necessários.
+
+=== Políticas para Recursos de Rede e Registry
+[source,text]
+----
+# Permite que usuários obtenham o namespace do Object Storage para login no OCIR
+Allow group <group_name> to read object-storage-namespace in tenancy
+
+# Permite que usuários gerenciem repositórios de imagens de contêiner
+Allow group <group_name> to manage repos in compartment <compartment_name>
+----
+
+=== Políticas para Recursos de Functions
+[source,text]
+----
+# Permite que usuários gerenciem aplicações, funções e vejam métricas
+Allow group <group_name> to manage functions-family in compartment <compartment_name>
+Allow group <group_name> to read metrics in compartment <compartment_name>
+----
+
+=== Políticas para Recursos de Logging
+[source,text]
+----
+# Permite que usuários habilitem e gerenciem logs para suas aplicações
+Allow group <group_name> to manage logging-family in compartment <compartment_name>
+----
+
+=== Políticas para Acesso a Recursos de Rede
+[source,text]
+----
+# Permite que usuários especifiquem VCNs e subnets ao criar aplicações
+Allow group <group_name> to use virtual-network-family in compartment <compartment_name>
+----
+
+=== Políticas para Tracing (APM)
+
+Para que usuários e funções possam habilitar e visualizar o tracing de execuções no APM Trace Explorer.
+[source,text]
+----
+# Permite que o serviço Functions acesse os APM domains
+Allow service FaaS to use apm-domains in compartment <compartment_name>
+
+# Permite que os usuários acessem os APM domains
+Allow group <group_name> to use apm-domains in compartment <compartment_name>
+----
+
+image::images/image51.png[alt="Políticas de IAM para OCI Functions", title="Políticas de IAM para OCI Functions"]
+
+== Configuração do Ambiente de Desenvolvimento
+
+Existem várias opções para configurar um ambiente de desenvolvimento para OCI Functions.
+
+*`OCI Cloud Shell`*::
+A opção altamente recomendada para iniciantes que buscam uma configuração rápida. Permite experimentar a criação e o deploy de funções com poucos comandos executados diretamente do console.
+
+*`Máquina Local (Mac/Linux)`*::
+Oferece maior controle e flexibilidade. A autenticação e autorização são gerenciadas via _Oracle Cloud Infrastructure request signing_. Ao criar um novo contexto da CLI do Fn Project, é necessário especificar a flag `--provider oracle`.
+
+*`Instância de Compute OCI`*::
+Uma abordagem baseada em nuvem. A autenticação e autorização utilizam _instance principals_ e _dynamic groups_, eliminando a necessidade de gerenciar chaves privadas. Ao criar um novo contexto da CLI do Fn Project, a flag `--provider` deve ser fornecida com o valor `oracle-ip`.
