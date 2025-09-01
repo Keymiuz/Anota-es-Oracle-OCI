@@ -108,6 +108,10 @@ A função é o conceito central. É um bloco de código pequeno e focado, proje
 * *Armazenamento:* Funções são armazenadas como imagens de contêiner em um Container Registry (OCIR) especificado.
 * *Metadados:* A definição da função é armazenada como metadados no servidor do OCI Functions. Isso inclui detalhes de execução como a imagem de contêiner a ser usada, o tempo máximo de execução e o consumo máximo de memória permitido.
 
+image::images/image40.png[alt="Ecossistema do Oracle Functions", title="Ecossistema do Oracle Functions"]
+
+image::images/image41.png[alt="Ecossistema do Oracle Functions", title="Conceitos Gerais das Oracle Functions"]
+
 === Invocações (Invocations)
 
 É o ato de executar uma função.
@@ -123,6 +127,8 @@ Um trigger é o resultado de uma ação no sistema que envia uma requisição pa
 * *Orientado a Eventos:* Iniciado por eventos em outros serviços OCI (ex: um upload de arquivo no Object Storage).
 * *Orientado a Tempo:* Agendado para enviar requisições em intervalos definidos (ex: para tarefas periódicas).
 Uma função pode não ter nenhum trigger ou estar associada a múltiplos triggers.
+
+image::images/image42.png[alt="Ecossistema do Oracle Functions", title="Conceitos dos Triggers"]
 
 == Experiência de Desenvolvimento e Funcionalidades
 
