@@ -66,7 +66,7 @@ Para entender melhor, vamos visualizar a arquitetura de um app de e-commerce com
 
 NOTE: Note que cada serviço roda em seu próprio contêiner, o que permite que eles sejam escalados individualmente usando orquestradores como o *Kubernetes*.
 
-image::images\image2.png[alt="Camadas da Arquitetura", title="Camadas da Arquitetura Simples"]
+image::images/image2.png[alt="Camadas da Arquitetura", title="Camadas da Arquitetura Simples"]
 
 == A Briga do Século: Microsserviços vs. Monolito
 
@@ -113,10 +113,10 @@ Essa tabela é material de prova! Resume as principais diferenças.
 | Tudo ou nada. Escala-se a aplicação inteira.
 |===
 
-image::images\image3.png[alt="Camadas da Arquit de Microsserviços", title="Camadas da Arquitetura de Microsserviços"]
+image::images/image3.png[alt="Camadas da Arquit de Microsserviços", title="Camadas da Arquitetura de Microsserviços"]
 
 
-image::images\image4.png[alt="Camadas da Arquit de Microsserviços", title="Um vs Outro"]
+image::images/image4.png[alt="Camadas da Arquit de Microsserviços", title="Um vs Outro"]
 
 == Como os Serviços Conversam: Protocolos e Estilos
 
