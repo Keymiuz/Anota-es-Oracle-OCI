@@ -81,3 +81,4 @@ image::images/image99.png[alt="Exemplo de Análise de Logs em Tempo Real com Spl
 Neste caso de uso, o OCI Streaming é utilizado como o "backplane" de mensageria assíncrona na arquitetura, para desacoplar componentes de aplicações distribuídas (on-premises e SaaS) e fornecer transporte de dados em tempo real para múltiplos destinos.
 
 image::images/image100.png[alt="Arquiteturas de Exemplo com OCI Streaming", title="Arquiteturas de Exemplo com OCI Streaming"]
+
