@@ -58,6 +58,8 @@ A comunicação síncrona é como uma ligação telefônica: ambas as partes dev
 
 image::images/image103.png[alt="Duvído vc ler isso", title="Comunicação Assíncrona Entre Queues"]
 
+image::images/image104.png[alt="Duvído vc ler isso", title="Benefícios do OCI Queue"]
+
 == O Serviço OCI Queue
 
 O *OCI Queue* é um serviço de nuvem totalmente gerenciado e serverless que pode ser utilizado em um modelo de preços on-demand. Ele fornece comunicação por mensagens entre aplicações ou entre os vários componentes (microsserviços) de uma única aplicação.
@@ -81,5 +83,3 @@ Fornece as ferramentas necessárias para facilitar o monitoramento, a geração 
 
 *`Gerenciamento Automático de Recursos`*::
 A Oracle gerencia a alocação de recursos (servidores, armazenamento) e outras atividades de manutenção tradicionalmente associadas à implantação de outras soluções de mensageria, como WebLogic JMS ou sistemas Apache Kafka.
-
-image::images/image104.png[alt="Duvído vc ler isso", title="Benefícios do OCI Queue"]
