@@ -104,6 +104,28 @@ Este repositório contém minhas anotações de estudo para as certificações O
 
 ### 06: API Gateway
 - [Visão Geral do API Gateway](OCI%20Developer/06-API-Gateway/5.1.0APIGateaway.adoc)
+- [Pré-requisitos do API Gateway](OCI%20Developer/06-API-Gateway/5.2APIGateawayRequisites.adoc)
+- [Políticas de API](OCI%20Developer/06-API-Gateway/5.3APIPolices.adoc)
+- [Protótipo de API](OCI%20Developer/06-API-Gateway/5.3APIPrototype.adoc)
+- [Autorização de API](OCI%20Developer/06-API-Gateway/5.4APIAutorization.adoc)
+- [Autenticação Dinâmica](OCI%20Developer/06-API-Gateway/5.5APIDynamicAuth.adoc)
+
+### 07: Serverless - Streaming
+- [Introdução ao OCI Streaming](OCI%20Developer/07-Serveless-Streaming/7.1OSSIntroduction.adoc)
+- [Recursos do OCI Streaming](OCI%20Developer/07-Serveless-Streaming/7.2OSSFeatures.adoc)
+- [Fundamentos do Streaming](OCI%20Developer/07-Serveless-Streaming/7.3StreamingFundamentals.adoc)
+- [Casos de Uso de Streaming](OCI%20Developer/07-Serveless-Streaming/7.4StreamingUseCases.adoc)
+
+### 08: Serverless - Queue
+- [Introdução ao OCI Queue](OCI%20Developer/08-Serveless-Queue/8.1QueueIntro.adoc)
+- [Casos de Uso de Filas](OCI%20Developer/08-Serveless-Queue/8.2QueueUseCases.adoc)
+- [Operações no OCI Queue](OCI%20Developer/08-Serveless-Queue/8.3OCIQueueOperations.adoc)
+- [Fundamentos do OCI Queue](OCI%20Developer/08-Serveless-Queue/8.4OCIQueuFundamentals.adoc)
+- [Recursos do OCI Queue](OCI%20Developer/08-Serveless-Queue/8.5QueueFeatures.adoc)
+
+### 09: Serverless - Events
+- [Conceitos de Eventos](OCI%20Developer/09-Serveless-Events/9.1EventsConcept.adoc)
+
 
 ## 🚀 Como Usar
 
