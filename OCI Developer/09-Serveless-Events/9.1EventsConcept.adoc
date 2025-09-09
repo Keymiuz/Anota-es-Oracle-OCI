@@ -4,7 +4,7 @@
 
 [preamble]
 --
-Neste módulo do curso, vamos explorar o OCI Events Service. Pense neste serviço como o sistema nervoso central da sua tenancy na OCI. Ele permite que você pare de perguntar "algo mudou?" (polling) e comece a reagir em tempo real quando "algo muda". Dominar a arquitetura orientada a eventos é uma habilidade fundamental para qualquer desenvolvedor sênior ou arquiteto de nuvem, pois é a base para a criação de automações eficientes, resilientes e escaláveis.
+Neste módulo do curso, exploramos o OCI Events Service. Pense neste serviço como o sistema nervoso central da sua tenancy na OCI. Ele permite que você pare de perguntar "algo mudou?" (polling) e comece a reagir em tempo real quando "algo muda". Dominar a arquitetura orientada a eventos é uma habilidade fundamental para qualquer desenvolvedor sênior ou arquiteto de nuvem, pois é a base para a criação de automações eficientes, resilientes e escaláveis.
 --
 
 == Visão Geral e Propósito

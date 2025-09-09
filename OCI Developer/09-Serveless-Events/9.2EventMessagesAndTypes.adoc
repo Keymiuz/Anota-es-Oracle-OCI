@@ -4,7 +4,7 @@
 
 [preamble]
 --
-Neste módulo do curso, vamos fazer um "deep dive" na unidade fundamental do OCI Events Service: a própria mensagem de evento. Compreender a estrutura de uma mensagem e como os milhares de tipos de eventos são organizados é essencial para construir regras de automação que sejam precisas, eficientes e robustas. Vamos dissecar o que acontece "debaixo do capô".
+Neste módulo do curso, fizemos um "deep dive" na unidade fundamental do OCI Events Service: a própria mensagem de evento. Compreender a estrutura de uma mensagem e como os milhares de tipos de eventos são organizados é essencial para construir regras de automação que sejam precisas, eficientes e robustas. Vamos dissecar o que acontece "debaixo do capô".
 --
 
 == Anatomia de uma Mensagem de Evento
