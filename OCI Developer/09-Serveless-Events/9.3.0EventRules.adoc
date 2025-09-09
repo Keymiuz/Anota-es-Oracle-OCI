@@ -117,3 +117,108 @@ image::images/image142.png[alt="Visão Geral do OCI Notifications", title="Visã
 .. Escolha o *Tópico* apropriado na lista.
 
 image::images/image143.png[alt="Configurando a Ação para OCI Notifications", title="Configurando a Ação para OCI Notifications"]
+
+
+=== Workflow de Planejamento e Criação de Regras (Design e Criação de Regras de Automação)
+
+A criação de uma regra eficaz começa com um planejamento cuidadoso.
+
+.Fases do Workflow:
+. *Preparação dos Recursos de Ação:*
++
+--
+Antes de criar a regra, os recursos que servirão como destino (Ação) já devem existir. Por exemplo, se a intenção é notificar uma equipe quando um backup for concluído, o tópico do *OCI Notifications Service* e suas assinaturas (ex: um canal do Slack) devem ser criados primeiro.
+
+[NOTE]
+====
+Os recursos de destino (Ações) *não precisam* estar no mesmo compartment que a Regra. É possível, por exemplo, ter uma regra no `compartment-A` que invoca uma função no `compartment-B`.
+====
+--
+. *Planejamento da Estratégia de Correspondência (Matching):*
++
+--
+É preciso planejar a lógica de filtragem.
+* *Verificar a Emissão:* Confirme que o recurso que você deseja monitorar (ex: Autonomous Data Warehouse) de fato emite um tipo de evento que atende à sua necessidade de automação (ex: `backup.end`).
+* *Analisar o Payload:* Revise um exemplo do evento JSON para determinar a melhor maneira de identificar e filtrar os recursos de interesse (ex: usando o `resourceName`, o `compartmentId` ou tags).
+--
+. *Criação da Regra:*
++
+--
+Com o planejamento concluído, a regra é criada no compartment apropriado, especificando as condições de filtro e as ações de destino.
+--
+
+=== A Anatomia de uma Regra
+
+Uma regra é uma estrutura simples que conecta uma condição de gatilho a uma ou mais ações de resposta.
+
+*`Trigger Condition (Condição de Gatilho)`*::
+A parte "SE" da lógica. É composta por um ou mais *tipos de evento* e, opcionalmente, por *filtros* adicionais baseados em atributos do evento ou em tags do recurso.
+
+*`Response Action (Ação de Resposta)`*::
+A parte "ENTÃO" da lógica. É a ação a ser executada quando a condição de gatilho é atendida. Uma única regra pode ter múltiplas ações (ex: notificar uma equipe *e* invocar uma função).
+
+image::images/image144.png[alt="A Anatomia de uma Regra", title="A Anatomia de uma Regra: Criação"]
+
+=== Construindo Condições de Regra no Console
+
+A interface do Console da OCI oferece dois modos para a criação de regras.
+
+=== Modo Simples (Simple Mode)
+
+Este modo guia o usuário através da construção de condições com menus dropdown.
+. *Condição 1: Tipo de Evento (Event Type):*
+** Seleciona-se o *Serviço* (ex: `Database Service`) e um ou mais *Tipos de Evento* (ex: `Autonomous Database - Backup End`).
+. *Condição 2 (Opcional): Filtros de Atributo:*
+** Permite filtrar por valores específicos no payload do evento. Por exemplo, pode-se adicionar um filtro onde o atributo `resourceName` deve ser igual a `PROD_DB_01`.
+. *Condição 3 (Opcional): Filtros de Tag:*
+** Permite filtrar por recursos que possuem uma tag específica. Por exemplo, apenas acionar para recursos com a _defined tag_ `Project.CostCenter` igual a `XYZ`.
+
+image::images/image145.png[alt="Construindo Condições de Regra", title="Construindo Condições de Regra (Para o modo avançado ver a Demo no curso)"]
+
+=== Modo Avançado (Advanced Mode)
+
+Permite que usuários experientes escrevam a lógica da regra diretamente em uma sintaxe JSON complexa, ideal para condições mais elaboradas que não são possíveis no modo simples.
+
+=== Considerações de Design e Melhores Práticas
+
+* *Escopo de Compartment:*
+** Regras se aplicam a eventos no compartment em que são criadas. É possível, opcionalmente, incluir todos os _child compartments_ (sub-compartimentos). Para criar uma regra que abranja toda a tenancy, ela deve ser criada no *root compartment*.
+
+* *Permissões de IAM:*
+** *Para Usuários:* Para criar, ler, atualizar e deletar (CRUD) regras de eventos, os usuários precisam da permissão `events-rule-management`.
+** *Para o Serviço:* É necessário criar uma política que permita ao *próprio Events Service* entregar mensagens aos recursos de destino. Ex: `Allow service events to use functions in compartment <compartment_name>`.
+
+* *Uso de Tags para Filtragem:*
+** É uma melhor prática utilizar tags para refinar as condições de uma regra, além de filtrar por atributos do recurso. Isso permite um controle mais granular e flexível.
+
+* *Limites de Serviço:*
+** O número máximo de regras por tenancy é de 50 (este limite pode ser aumentado). Uma única regra pode conter múltiplas condições e ações.
+
+image::images/image146.png[alt="Considerações de Design e Melhores Práticas", title="Considerações de Design das Regras"]
+
+== Garantias do Serviço e Monitoramento
+
+=== Garantias de Entrega
+
+O Events Service oferece as seguintes garantias:
+* *Avaliação At-Least-Once:* Todo evento ingerido será avaliado *pelo menos uma vez* contra todas as regras definidas.
+* *Tentativa de Entrega At-Least-Once:* Se uma regra for correspondida, o serviço tentará entregar o evento para todas as suas ações *pelo menos uma vez*.
+* *Política de Retentativas (Retries):* Se um destino de ação não estiver respondendo, o serviço tentará a entrega por até *5 horas* ou até que um erro não recuperável ocorra.
+[WARNING]
+====
+.Não-Garantia de Ordem
+O serviço *não garante* que os eventos serão processados ou recebidos na ordem em que foram gerados.
+====
+
+=== Métricas de Monitoramento
+
+O OCI Events Metrics ajuda a medir o sucesso das regras e a qualidade dos eventos na tenancy. Os dados são armazenados por até 90 dias.
+
+.Métricas Chave por Regra:
+* O número total de eventos que *corresponderam* à regra.
+* Quantos eventos foram *roteados com sucesso* para as ações correspondentes.
+* Quantas entregas *falharam*.
+
+Estas métricas podem ser visualizadas em dashboards de telemetria, e também é possível visualizar o número total de eventos emitidos no escopo de um compartment inteiro.
+
+image::images/image147.png[alt="Métricas de Monitoramento", title="Métricas de Monitoramento"]
