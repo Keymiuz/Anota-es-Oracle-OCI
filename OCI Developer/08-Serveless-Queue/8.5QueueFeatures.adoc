@@ -118,3 +118,13 @@ O STOMP pode aumentar a eficiência porque a autenticação é realizada *apenas
 ====
 
 image::images/image127.png[alt="Métodos de Acesso ao OCI Queue", title="Métodos de Acesso ao OCI Queue"]
+
+image::images/image128.png[alt="Diferenças entre Streaming e Queue", title="Diferenças entre Streaming e Queue"]
+
+image::images/image129.png[alt="Diferenças entre Streaming e Queue", title="Diferenças entre Streaming e Queue: Custo"]
+
+image::images/image130.png[alt="Diferenças entre Streaming e Queue", title="Diferenças entre Streaming e Queue: Volume"]
+
+image::images/image131.png[alt="Diferenças entre Streaming e Queue", title="Diferenças entre Streaming e Queue: Suporte"]
+
+image::images/image132.png[alt="Diferenças entre Streaming e Queue", title="Diferenças entre Streaming e Queue: Conclusão Geral"]
