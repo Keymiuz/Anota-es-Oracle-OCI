@@ -125,7 +125,22 @@ Este repositório contém minhas anotações de estudo para as certificações O
 
 ### 09: Serverless - Events
 - [Conceitos de Eventos](OCI%20Developer/09-Serveless-Events/9.1EventsConcept.adoc)
+- [Configuração de Eventos](OCI%20Developer/09-Serveless-Events/9.2EventsConfiguration.adoc)
+- [Gatilhos e Ações](OCI%20Developer/09-Serveless-Events/9.3EventsTriggers.adoc)
+- [Casos de Uso Comuns](OCI%20Developer/09-Serveless-Events/9.4EventsUseCases.adoc)
+- [Integração com Outros Serviços](OCI%20Developer/09-Serveless-Events/9.5EventsIntegration.adoc)
 
+### 10: Testes e Segurança de Aplicações Cloud Native
+- [Visão Geral de Testes em Aplicações Cloud Native](OCI%20Developer/10-Testing-&-Securing-CN-Apps/10.1CNTestingOverview.adoc)
+- [Estratégias de Teste](OCI%20Developer/10-Testing-&-Securing-CN-Apps/10.2TestingEstrategies.adoc)
+- [Visão Geral do OCI Vault](OCI%20Developer/10-Testing-&-Securing-CN-Apps/10.3OCIVault.adoc)
+- [Integração do OCI Vault com Outros Serviços](OCI%20Developer/10-Testing-&-Securing-CN-Apps/10.4OCIVaultWithServices.adoc)
+- [Visão Geral de Segredos no OCI Vault](OCI%20Developer/10-Testing-&-Securing-CN-Apps/10.5OCIVaultSecretsOverview.adoc)
+- [Segurança de Imagens no OKE](OCI%20Developer/10-Testing-&-Securing-CN-Apps/10.6OKEImageSecurity.adoc)
+
+### 11: Monitoramento e Solução de Problemas
+- [Visão Geral do Monitoramento e Solução de Problemas](OCI%20Developer/11-Monitoring-And-TroubleShoot-CN-Apps/11.1MonitoringAndTroubleShooting.adoc)
+- [Visão Geral do Serviço de Logging](OCI%20Developer/11-Monitoring-And-TroubleShoot-CN-Apps/11.2LoggingOverview.adoc)
 
 ## 🚀 Como Usar
 
