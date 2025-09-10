@@ -1,0 +1,84 @@
+= Estratégias de Teste para Aplicações Cloud-Native
+:toc: levels=2
+:icons: font
+
+== A Pirâmide de Testes em um Contexto de Microsserviços
+
+A tradicional pirâmide de testes ainda é relevante, mas sua aplicação é adaptada para a granularidade dos microsserviços.
+
+*`Unit Testing (Teste de Unidade)`*::
+*Escopo:* Testar as menores partes granulares de um componente de serviço individual (classes, métodos).
+*Objetivo:* Verificar se as unidades individuais de código funcionam corretamente de forma isolada. Em microsserviços, isso facilita a identificação de problemas muito cedo no ciclo de desenvolvimento, permitindo que os desenvolvedores observem mudanças no estado da unidade e verifiquem a interação entre os objetos internos.
+
+*`Component Testing (Teste de Componente)`*::
+*Escopo:* Testar cada microsserviço completo, mas de forma isolada de outros serviços.
+*Objetivo:* Após os testes de unidade, os testes de componente analisam a performance e a funcionalidade de cada microsserviço como um todo coeso. As dependências externas (outros microsserviços, bancos de dados) são geralmente simuladas (_mocked_ ou _stubbed_). Isso garante que cada microsserviço funcione exatamente como projetado antes de ser integrado.
+
+*`Integration Testing (Teste de Integração)`*::
+*Escopo:* Testar os caminhos de comunicação e a interação entre os componentes de serviço individuais, ou entre os componentes e serviços externos.
+*Objetivo:* Determinar se os serviços estão trabalhando juntos para alcançar uma lógica funcional maior. Disparados por servidores de CI, esses testes verificam se os contratos entre os serviços estão sendo respeitados e se novas funcionalidades são compatíveis com a arquitetura existente.
+
+*`End-to-End Testing (Teste de Ponta a Ponta)`*::
+*Escopo:* Verificar todo o fluxo de usuário através da aplicação, englobando todas as partes móveis no nível mais alto de integração.
+*Objetivo:* Garantir que a aplicação como um todo funciona como esperado da perspectiva do usuário final.
+
+[WARNING]
+====
+Testes E2E são demorados, exigem muitos recursos e são caros de manter. Idealmente, devem ser realizados com moderação, apenas para os fluxos mais críticos, após as outras estratégias de teste já terem sido concluídas.
+====
+
+== Estratégias de Teste Diferentes:
+
+*`Contract Testing (Teste de Contrato)`*::
+*Escopo:* Validar a interface (o "contrato") entre um serviço consumidor e um serviço provedor.
+*Objetivo:* Em uma arquitetura de microsserviços, quando um consumidor depende da saída de um provedor, um contrato de serviço é estabelecido. Testes de contrato verificam se as mudanças no provedor ou no consumidor quebram esse contrato, garantindo que as integrações permaneçam estáveis sem a necessidade de testes de integração completos.
+
+*`Non-Functional Testing (Teste Não Funcional)`*::
+*Escopo:* Testar aspectos de qualidade que não estão relacionados à funcionalidade de negócio.
+*Objetivo:* Garantir que a aplicação atenda aos requisitos de performance, usabilidade, carga e segurança. É crucial para detectar e corrigir desvios de comportamento em cenários de falha (queda de um servidor, indisponibilidade de um serviço dependente) antes que impactem a produção.
+
+*`Security Testing (Teste de Segurança)`*::
+*Escopo:* Identificar e mitigar ameaças e vulnerabilidades de segurança.
+*Objetivo:* Com os dados hospedados na nuvem, a segurança é uma preocupação primordial. O objetivo é impedir que ameaças ou malwares acessem, roubem ou manipulem dados sensíveis, medindo o impacto de vulnerabilidades potenciais.
+
+== O Desafio dos "Unknown Unknowns"
+
+Testes tradicionais são excelentes para validar requisitos conhecidos. Mas como testamos falhas que nem sabemos que podem acontecer?
+
+* *Known Knowns (Conhecidos Conhecidos):* Fatos sobre nosso serviço.
+* *Known Unknowns (Desconhecidos Conhecidos):* Questões que podemos formular e responder com testes. Ex: "O serviço retorna um erro 400 se o usuário enviar dados inválidos?". Os testes nos ajudam a mover estas incertezas para o quadrante dos "Known Knowns".
+* *Unknown Unknowns (Desconhecidos Desconhecidos):* Problemas que não sabíamos que poderiam acontecer. Não podemos testar para eles diretamente, pois, por definição, não sabemos o que pode falhar até que falhe.
+
+[IMPORTANT]
+====
+.O Papel da Observabilidade
+A única maneira de descobrir os "Unknown Unknowns" é através de boas ferramentas de *observabilidade* em produção. Elas nos permitem depurar novos problemas que não poderíamos antecipar, embora a um custo mais alto.
+====
+
+[TIP]
+====
+.Transformando o Desconhecido em Conhecido
+Uma vez que um "Unknown Unknown" é identificado em produção, a melhor prática é escrever o teste mais barato possível (geralmente um teste de unidade ou componente) para ele. Isso evita regressões futuras e move o problema para o quadrante dos "Known Unknowns", economizando tempo e dinheiro.
+====
+
+== Estratégias Avançadas para Testar o Imprevisível
+
+Para identificar falhas inesperadas antes que cheguem à produção, as seguintes estratégias são úteis.
+
+*`Chaos Engineering e Failure Mode Testing`*::
+A engenharia do caos é o processo proativo e deliberado de injetar falhas em um sistema (geralmente em condições controladas) para descobrir como ele responde. O objetivo é identificar proativamente possíveis falhas de design antes que elas ocorram em produção, resultando em um produto mais confiável e resiliente.
+
+*`Canary Deployments (Deployments Canário)`*::
+Liberar gradualmente novas funcionalidades para um pequeno subconjunto de usuários. Esta é uma prática recomendada que permite identificar e corrigir falhas antes de disponibilizar a nova versão para uma audiência maior. O impacto de um bug é relativamente pequeno e as alterações podem ser revertidas rapidamente.
+
+*`A/B Testing (Teste A/B)`*::
+Enquanto os _canary releases_ são para detectar problemas, o teste A/B é uma maneira de testar uma hipótese usando implementações variantes. Duas versões de uma funcionalidade são comparadas para determinar qual tem melhor performance com base em métricas predefinidas, permitindo a tomada de decisões baseada em dados.
+
+*`Blue/Green Deployment`*::
+Uma estratégia de deploy que utiliza dois ambientes de produção idênticos: "Blue" (o ambiente ao vivo atual) e "Green" (o novo ambiente).
+. O novo código é implantado e totalmente testado no ambiente "Green", sem impactar o tráfego de produção.
+. Quando a nova versão é validada, o roteador de tráfego é alternado para direcionar todas as requisições para o ambiente "Green".
+. Esta técnica elimina o downtime durante o deploy e reduz o risco. Se algo inesperado acontecer, o rollback é instantâneo, bastando alternar o roteador de volta para o ambiente "Blue".
+
+*`Observability, Monitoring e Log Analysis`*::
+A observabilidade é a abordagem para entender o estado interno de um produto através da observação de suas saídas (logs, métricas, traces). Ferramentas de monitoramento coletam, armazenam e permitem consultar informações sobre o estado, comportamento e interação entre os serviços em produção. A análise desses dados é crucial para obter insights valiosos e depurar problemas rapidamente.
