@@ -1,0 +1,55 @@
+= Módulo de Treinamento: Monitoramento e Troubleshooting de Aplicações Cloud-Native
+:toc: levels=2
+:icons: font
+
+[preamble]
+--
+Bem-vindo a este módulo crucial do nosso curso. Até agora, focamos em como construir e implantar aplicações cloud-native. Agora, vamos abordar uma realidade inevitável da engenharia de software: sistemas falham. Aplicações distribuídas, com seus múltiplos componentes, introduzem novas camadas de complexidade no diagnóstico de problemas. A habilidade de monitorar, diagnosticar e depurar esses sistemas de forma eficaz não é um luxo, é um requisito fundamental para qualquer desenvolvedor ou operador sênior. Este módulo fornecerá o conhecimento sobre as ferramentas e técnicas essenciais para garantir que suas aplicações na OCI sejam não apenas funcionais, mas também observáveis e resilientes.
+--
+
+== Os Pilares da Observabilidade na OCI
+
+Para facilitar o troubleshooting de aplicações cloud-native na OCI, o desenvolvedor deve dominar, no mínimo, as capacidades de três serviços fundamentais que compõem o pilar de observabilidade da plataforma.
+
+*`OCI Monitoring`*::
+Responsável pela coleta de *métricas* de performance e saúde da maioria dos recursos da OCI, incluindo os serviços essenciais para deployments cloud-native como OKE, Functions e API Gateway.
+
+*`OCI Logging`*::
+Responsável pela captura, busca e análise de *logs*, tanto os logs de serviço emitidos pela plataforma quanto logs customizados gerados pelas próprias aplicações. Permite a execução de ações downstream com base no conteúdo dos logs.
+
+*`OCI APM (Application Performance Monitoring)`*::
+Responsável pelo *tracing* distribuído, permitindo rastrear uma requisição através de múltiplos microsserviços para identificar gargalos de performance e entender o fluxo completo de uma transação.
+
+[IMPORTANT]
+====
+.Além dos Serviços Nativos
+Embora este módulo foque nas ferramentas da OCI, é crucial para um profissional sênior conhecer e considerar o vasto ecossistema de bibliotecas, ferramentas e serviços de código aberto (open source) para monitoramento, troubleshooting e debugging, dependendo dos requisitos e preferências de cada projeto.
+====
+
+== Agenda Detalhada do Módulo
+
+Este módulo está estruturado com uma série de lições teóricas e demonstrações práticas para cobrir os principais aspectos do monitoramento e troubleshooting.
+
+* *Tópico 1: Monitoramento e Logs Nativos da OCI*
+** *Lição:* Visão Geral do OCI Monitoring Service.
+** *Lição:* Visão Geral do OCI Logging Service.
+** *Demonstração Prática:* Análise das métricas nativas e habilitação de logs para o *Oracle Functions*.
+** *Demonstração Prática:* Análise das métricas de deployment e habilitação/visualização de logs para o *API Gateway*.
+** *Demonstração Prática:* Análise das métricas nativas do OKE, visualização de audit logs e captura de logs de aplicação customizados de contêineres no *OKE*.
+
+* *Tópico 2: Application Performance Monitoring (APM)*
+** *Lição:* Visão Geral das capacidades do serviço de Application Performance Monitoring.
+** *Demonstração Prática:* Provisionamento de um novo APM Domain e habilitação/uso de *tracing* para o Oracle Functions.
+** *Demonstração Prática:* Configuração avançada do APM Tracer e de Agentes de Browser, e adição de _traces_ e _spans_ customizados no código da aplicação.
+
+* *Tópico 3: Debugging com Ferramentas de Terceiros*
+** *Lição:* Exemplo de uso de um serviço de debugging de código aberto, *Rookout*, para troubleshooting de uma aplicação Java containerizada.
+
+image::images/image124.png[alt="Agenda do Módulo de Monitoramento", title="Agenda do Módulo de Monitoramento"]
+
+== Recursos Adicionais para Aprofundamento
+
+Embora as lições e demonstrações deste módulo forneçam uma excelente base inicial, o aprendizado contínuo é essencial. Certifique-se de explorar também os seguintes recursos:
+
+* A Documentação Online e o Help Center da OCI.
+* O Oracle Developer Resource Center for Cloud Native.
